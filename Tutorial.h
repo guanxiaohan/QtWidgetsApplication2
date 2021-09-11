@@ -13,7 +13,7 @@ class Tutorial :public QMainWindow {
 	Q_OBJECT
 
 public:
-	Tutorial();
+	Tutorial(QMainWindow* parent = nullptr);
 	~Tutorial();
 	struct Tab {
 		QString file;
