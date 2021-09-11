@@ -107,7 +107,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Tutorial.h" />
+    <ClInclude Include="x64\Debug\uic\ui_textPage.h" />
+    <QtMoc Include="Tutorial.h" />
     <QtMoc Include="textPage.h" />
   </ItemGroup>
   <ItemGroup>
