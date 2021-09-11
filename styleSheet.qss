@@ -8,5 +8,5 @@ QMenu::item:selected{
 	background-color:#555555;
 }
 QTabWidget{
-	border:5px soild blue
+	border:5px soild blue;
 }
