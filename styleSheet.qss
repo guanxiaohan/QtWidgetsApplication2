@@ -7,6 +7,12 @@ QMenuBar::item:selected{
 QMenu::item:selected{
 	background-color:#555555;
 }
-QTabWidget{
-	border:5px soild blue;
+QTabWidget::pane{
+	border:1px soild #0099FF;
+}
+QTreeWidget{
+	background-color:#444444;
+}
+QHeaderView::section{
+	color:#FFFFFF;
 }
