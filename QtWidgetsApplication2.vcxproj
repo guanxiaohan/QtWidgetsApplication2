@@ -121,6 +121,9 @@
   <ItemGroup>
     <Text Include="C:\Users\Lenovo\OneDrive\桌面\test.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="styleSheet.qss" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
     <Import Project="$(QtMsBuild)\qt.targets" />

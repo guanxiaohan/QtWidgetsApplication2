@@ -78,4 +78,9 @@
   <ItemGroup>
     <Text Include="C:\Users\Lenovo\OneDrive\桌面\test.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="styleSheet.qss">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
