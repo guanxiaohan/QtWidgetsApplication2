@@ -1,0 +1,12 @@
+QMainWindow{
+	background-color:#555555;
+}
+QMenuBar::item:selected{
+	background-color:#555555
+}
+QMenu::item:selected{
+	background-color:#555555;
+}
+QTabWidget{
+	border:5px soild blue
+}

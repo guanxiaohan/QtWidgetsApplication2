@@ -21,7 +21,6 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QWidget>
 
@@ -62,7 +61,6 @@ public:
     QMenuBar *menuBar;
     QMenu *menu_File;
     QMenu *menuEdit;
-    QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *Tutorial)
@@ -73,6 +71,7 @@ public:
         QIcon icon;
         icon.addFile(QString::fromUtf8("bitmap1.bmp"), QSize(), QIcon::Normal, QIcon::Off);
         Tutorial->setWindowIcon(icon);
+        Tutorial->setStyleSheet(QString::fromUtf8("background-color:#222222;"));
         actionNew = new QAction(Tutorial);
         actionNew->setObjectName(QString::fromUtf8("actionNew"));
         actionNew_folder = new QAction(Tutorial);
@@ -137,13 +136,12 @@ public:
         gridLayout->addLayout(horizontalLayout, 0, 0, 1, 2);
 
         treeWidget = new QTreeWidget(gridLayoutWidget);
-        QTreeWidgetItem *__qtreewidgetitem = new QTreeWidgetItem();
-        __qtreewidgetitem->setText(0, QString::fromUtf8("Folder"));
-        treeWidget->setHeaderItem(__qtreewidgetitem);
         treeWidget->setObjectName(QString::fromUtf8("treeWidget"));
         treeWidget->setMinimumSize(QSize(150, 0));
         treeWidget->setMaximumSize(QSize(300, 16777215));
+        treeWidget->setStyleSheet(QString::fromUtf8(""));
         treeWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        treeWidget->setHeaderHidden(false);
         treeWidget->setColumnCount(1);
         treeWidget->header()->setVisible(true);
 
@@ -151,6 +149,7 @@ public:
 
         tabWidget = new QTabWidget(gridLayoutWidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
+        tabWidget->setStyleSheet(QString::fromUtf8("background-color:#333333;border:0px soild #111111;margin:0px 0px 0px 0px"));
         tabWidget->setTabPosition(QTabWidget::North);
         tabWidget->setTabShape(QTabWidget::Rounded);
         tabWidget->setElideMode(Qt::ElideLeft);
@@ -162,16 +161,15 @@ public:
         menuBar = new QMenuBar(Tutorial);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 789, 22));
+        menuBar->setStyleSheet(QString::fromUtf8("background-color:rgb(61, 61, 61);color:white;"));
         menu_File = new QMenu(menuBar);
         menu_File->setObjectName(QString::fromUtf8("menu_File"));
         menuEdit = new QMenu(menuBar);
         menuEdit->setObjectName(QString::fromUtf8("menuEdit"));
         Tutorial->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(Tutorial);
-        mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
-        Tutorial->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(Tutorial);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
+        statusBar->setStyleSheet(QString::fromUtf8("background-color:#0099FF"));
         Tutorial->setStatusBar(statusBar);
 
         menuBar->addAction(menu_File->menuAction());
@@ -238,6 +236,8 @@ public:
         actionPrint->setText(QCoreApplication::translate("Tutorial", "Print...", nullptr));
         actionSettings_2->setText(QCoreApplication::translate("Tutorial", "Settings...", nullptr));
         actionQuit_2->setText(QCoreApplication::translate("Tutorial", "Quit", nullptr));
+        QTreeWidgetItem *___qtreewidgetitem = treeWidget->headerItem();
+        ___qtreewidgetitem->setText(0, QCoreApplication::translate("Tutorial", "Folder", nullptr));
         menu_File->setTitle(QCoreApplication::translate("Tutorial", "&File", nullptr));
         menuEdit->setTitle(QCoreApplication::translate("Tutorial", "Edit", nullptr));
     } // retranslateUi

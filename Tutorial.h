@@ -4,6 +4,8 @@
 #include "textPage.h"
 #include <qmainwindow.h>
 #include <QtCore/QList>
+#include <QFile>
+#include <qtextstream.h>
 
 namespace Ui {
 	class Tutorial;
