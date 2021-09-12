@@ -50,9 +50,7 @@ QString textPage::GetFile()
 void textPage::colorText()
 {
 	QString to_find_text = ui->textEdit->toPlainText();
-	to_find_text.replace("<", "\\<");
-	to_find_text.replace(">", "\\>");
-	to_find_text.replace("\n","\\n");
+	to_find_text.replace("\n","<pre>\n</pre>");
 
 	to_find_text.replace("new", "<b>new</b>");
 	ui->textEdit->setHtml(to_find_text);
