@@ -1,3 +1,4 @@
+//yesï¼I log in the github and can edit!
 #include "textPage.h"
 
 textPage::textPage(QString Text,QString File, QWidget* parent)
@@ -31,7 +32,7 @@ void textPage::setUp(QString str,QString file)
 {
 	ui->fileLabel->setText(str);
 	ui->textEdit->setText(file);
-	ui->textEdit->setFont(QFont("ËÎÌå",10));
+	ui->textEdit->setFont(QFont("Ã‹ÃŽÃŒÃ¥",10));
 	auto highlighter = new Highlighter(ui->textEdit->document());
 	connect(ui->textEdit, &QTextEdit::textChanged, this, &textPage::unSave);
 	fileSaved = true;
