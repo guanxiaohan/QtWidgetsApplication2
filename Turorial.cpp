@@ -8,6 +8,8 @@ Tutorial::Tutorial(QMainWindow* parent):
 	ui->centralWidget->setLayout(ui->gridLayout);
 	setCentralWidget(ui->centralWidget);
 
+	connect(ui->actionNew, &QAction::triggered, this, &Tutorial::newFile);
+
 	QFile Qss("styleSheet.qss");
 	Qss.open(QFile::ReadOnly);
 	QTextStream QssText(&Qss);
@@ -18,4 +20,19 @@ Tutorial::Tutorial(QMainWindow* parent):
 
 Tutorial::~Tutorial() {
 	delete ui;
+	for (int i = Tabs.size(); i > 0; i--) {
+		Tabs.removeAt((long)i - 1);
+	}
+}
+
+void Tutorial::newFile() 
+{
+	textPage* unit = new textPage();
+	ui->tabWidget->addTab(unit, tr("Untitled"));
+	Tabs.append(unit);
+}
+
+void Tutorial::openFile()
+{
+
 }

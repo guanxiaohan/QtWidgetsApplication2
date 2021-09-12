@@ -3,7 +3,7 @@
 #include "ui_Tutorial.h"
 #include "textPage.h"
 #include <qmainwindow.h>
-#include <QtCore/QList>
+#include <QList>
 #include <QFile>
 #include <qtextstream.h>
 
@@ -22,12 +22,13 @@ public:
 		QString text;
 		textPage* widget;
 	};
-	QList<Tab*> Tabs;
+	QList<textPage*> Tabs;
 
 private:
 	Ui::Tutorial* ui;
 	textPage* currentTab;
 
 private slots:
-
+	void newFile();
+	void openFile();
 };
