@@ -11,7 +11,10 @@
 #include <qregularexpression.h>
 #include <qstringliteral.h>
 #include <qstringlist.h>
-#include <QTimer>
+#include <qtimer.h>
+#include <qrgb.h>
+#include <qbrush.h>
+#include <qcolor.h>
 
 namespace Ui {
 	class textPage;
@@ -37,15 +40,15 @@ private:
 	void unSave() { fileSaved = false; };
 };
 
-class IntelliSence:public QSyntaxHighlighter
+class Highlighter:public QSyntaxHighlighter
 {
     Q_OBJECT
 
 public:
-    IntelliSence(QTextDocument * parent = 0);
+    Highlighter(QTextDocument* parent = 0);
 
 protected:
-    void IntelliSenceBlock(const QString& text) override;
+    virtual void highlightBlock(const QString& text);
 
 private:
     struct HighlightingRule

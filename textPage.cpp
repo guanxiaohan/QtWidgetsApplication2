@@ -31,10 +31,9 @@ void textPage::setUp(QString str,QString file)
 {
 	ui->fileLabel->setText(str);
 	ui->textEdit->setText(file);
-	timer->setInterval(5000);
+	auto highlighter = new Highlighter(ui->textEdit->document());
 	connect(ui->textEdit, &QTextEdit::textChanged, this, &textPage::unSave);
 	fileSaved = true;
-	timer->start();
 }
 
 QString textPage::GetText() {
@@ -46,13 +45,12 @@ QString textPage::GetFile()
 	return ui->fileLabel->text();
 }
 
-IntelliSence::IntelliSence(QTextDocument* parent)
+Highlighter::Highlighter(QTextDocument* parent)
 	: QSyntaxHighlighter(parent)
 {
 	HighlightingRule rule;
 
 	keywordFormat.setForeground(Qt::darkBlue);
-	keywordFormat.setFontWeight(QFont::Bold);
 	const QString keywordPatterns[] = {
 		QStringLiteral("\\bchar\\b"), QStringLiteral("\\bclass\\b"), QStringLiteral("\\bconst\\b"),
 		QStringLiteral("\\bdouble\\b"), QStringLiteral("\\benum\\b"), QStringLiteral("\\bexplicit\\b"),
@@ -63,15 +61,15 @@ IntelliSence::IntelliSence(QTextDocument* parent)
 		QStringLiteral("\\bslots\\b"), QStringLiteral("\\bstatic\\b"), QStringLiteral("\\bstruct\\b"),
 		QStringLiteral("\\btemplate\\b"), QStringLiteral("\\btypedef\\b"), QStringLiteral("\\btypename\\b"),
 		QStringLiteral("\\bunion\\b"), QStringLiteral("\\bunsigned\\b"), QStringLiteral("\\bvirtual\\b"),
-		QStringLiteral("\\bvoid\\b"), QStringLiteral("\\bvolatile\\b"), QStringLiteral("\\bbool\\b")
+		QStringLiteral("\\bvoid\\b"), QStringLiteral("\\bvolatile\\b"), QStringLiteral("\\bbool\\b"),
+		QStringLiteral("\\breturn\\b"),QStringLiteral("\\bnew\\b")
 	};
 	for (const QString& pattern : keywordPatterns) {
 		rule.pattern = QRegularExpression(pattern);
 		rule.format = keywordFormat;
 		highlightingRules.append(rule);
 	}
-	classFormat.setFontWeight(QFont::Bold);
-	classFormat.setForeground(Qt::darkMagenta);
+	classFormat.setForeground(QBrush(QColor(qRgb(0, 100, 255))));
 	rule.pattern = QRegularExpression(QStringLiteral("\\bQ[A-Za-z]+\\b"));
 	rule.format = classFormat;
 	highlightingRules.append(rule);
@@ -86,19 +84,17 @@ IntelliSence::IntelliSence(QTextDocument* parent)
 	rule.pattern = QRegularExpression(QStringLiteral("\\b[A-Za-z0-9_]+(?=\\()"));
 	rule.format = functionFormat;
 	highlightingRules.append(rule);
-
-	singleLineCommentFormat.setForeground(Qt::red);
+	singleLineCommentFormat.setForeground(QBrush(QColor(qRgb(0, 200, 0))));
 	rule.pattern = QRegularExpression(QStringLiteral("//[^\n]*"));
 	rule.format = singleLineCommentFormat;
 	highlightingRules.append(rule);
 
-	multiLineCommentFormat.setForeground(Qt::red);
+	multiLineCommentFormat.setForeground(QBrush(QColor(qRgb(0,200,0))));
 
 	commentStartExpression = QRegularExpression(QStringLiteral("/\\*"));
 	commentEndExpression = QRegularExpression(QStringLiteral("\\*/"));
 }
-
-void IntelliSence::IntelliSenceBlock(const QString& text)
+void Highlighter::highlightBlock(const QString& text)
 {
 	for (const HighlightingRule& rule : qAsConst(highlightingRules)) {
 		QRegularExpressionMatchIterator matchIterator = rule.pattern.globalMatch(text);
