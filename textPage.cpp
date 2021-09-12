@@ -31,6 +31,7 @@ void textPage::setUp(QString str,QString file)
 {
 	ui->fileLabel->setText(str);
 	ui->textEdit->setText(file);
+	ui->textEdit->setFont(QFont("ËÎÌו",10));
 	auto highlighter = new Highlighter(ui->textEdit->document());
 	connect(ui->textEdit, &QTextEdit::textChanged, this, &textPage::unSave);
 	fileSaved = true;
@@ -50,7 +51,7 @@ Highlighter::Highlighter(QTextDocument* parent)
 {
 	HighlightingRule rule;
 
-	keywordFormat.setForeground(Qt::darkBlue);
+	keywordFormat.setForeground(QBrush(QColor(qRgb(0, 150, 255))));
 	const QString keywordPatterns[] = {
 		QStringLiteral("\\bchar\\b"), QStringLiteral("\\bclass\\b"), QStringLiteral("\\bconst\\b"),
 		QStringLiteral("\\bdouble\\b"), QStringLiteral("\\benum\\b"), QStringLiteral("\\bexplicit\\b"),
@@ -79,8 +80,7 @@ Highlighter::Highlighter(QTextDocument* parent)
 	rule.format = quotationFormat;
 	highlightingRules.append(rule);
 
-	functionFormat.setFontItalic(true);
-	functionFormat.setForeground(Qt::blue);
+	functionFormat.setForeground(QBrush(QColor(qRgb(230, 255, 0))));
 	rule.pattern = QRegularExpression(QStringLiteral("\\b[A-Za-z0-9_]+(?=\\()"));
 	rule.format = functionFormat;
 	highlightingRules.append(rule);
