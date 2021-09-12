@@ -8,7 +8,16 @@ QMenu::item:selected{
 	background-color:#555555;
 }
 QTabWidget::pane{
-	border-top: 2px solid #C2C7CB;
+	border-top: 1px solid #C2C7CB;
+	border-bottom: 1px solid #C2C7CB;
+	border-left: 1px solid #C2C7CB;
+	border-right: 1px solid #C2C7CB;
+}
+QTextEdit:active{
+	border-top: 1px solid #0099FF;
+	border-bottom: 1px solid #0099FF;
+	border-left: 1px solid #0099FF;
+	border-right: 1px solid #0099FF;
 }
 QTabBar::tab{
 	background-color:#666666;

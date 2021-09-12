@@ -9,7 +9,7 @@ Tutorial::Tutorial(QMainWindow* parent):
 	setCentralWidget(ui->centralWidget);
 
 	connect(ui->actionNew, &QAction::triggered, this, &Tutorial::newFile);
-
+	
 	QFile Qss("styleSheet.qss");
 	Qss.open(QFile::ReadOnly);
 	QTextStream QssText(&Qss);

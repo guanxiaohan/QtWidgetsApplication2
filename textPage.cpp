@@ -22,6 +22,8 @@ textPage::textPage(QWidget* parent)
 
 textPage::~textPage()
 {
+	timer->stop();
+	delete timer;
 	delete ui;
 }
 
@@ -29,8 +31,11 @@ void textPage::setUp(QString str,QString file)
 {
 	ui->fileLabel->setText(str);
 	ui->textEdit->setText(file);
+	timer->setInterval(5000);
+	connect(timer, &QTimer::timeout, this, &textPage::colorText);
 	connect(ui->textEdit, &QTextEdit::textChanged, this, &textPage::unSave);
 	fileSaved = true;
+	timer->start();
 }
 
 QString textPage::GetText() {
@@ -40,4 +45,16 @@ QString textPage::GetText() {
 QString textPage::GetFile()
 {
 	return ui->fileLabel->text();
+}
+
+void textPage::colorText()
+{
+	QString to_find_text = ui->textEdit->toPlainText();
+	to_find_text.replace("<", "\\<");
+	to_find_text.replace(">", "\\>");
+	to_find_text.replace("\n","\\n");
+
+	to_find_text.replace("new", "<b>new</b>");
+	ui->textEdit->setHtml(to_find_text);
+	ui->textEdit->moveCursor(QTextCursor::End, QTextCursor::MoveAnchor);
 }

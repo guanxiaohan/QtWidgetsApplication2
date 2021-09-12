@@ -2,6 +2,11 @@
 
 #include <QWidget>
 #include "ui_textPage.h"
+#include <qtextdocument.h>
+#include <QTextCursor>
+#include <QTextCharFormat>
+#include <qmessagebox.h>
+#include <QTimer>
 
 namespace Ui {
 	class textPage;
@@ -19,9 +24,11 @@ public:
 	QString GetText();
 	QString GetFile();
 	bool fileSaved = true;
+	Ui::textPage* ui;
+	void colorText();
+	QTimer* timer = new QTimer();
 	
 private:
-	Ui::textPage * ui;
 	QString currentFile;
 	void unSave() { fileSaved = false; };
 };
