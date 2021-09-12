@@ -1,4 +1,4 @@
-//yes！I log in the github and can edit!第二个更改
+//yes！I log in the github and can edit!第二个更改di san ge geng gai.
 #include "textPage.h"
 
 textPage::textPage(QString Text,QString File, QWidget* parent)
