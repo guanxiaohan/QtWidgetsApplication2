@@ -1,4 +1,4 @@
-//yes！I log in the github and can edit!
+//yes！I log in the github and can edit!急急急
 #include "textPage.h"
 
 textPage::textPage(QString Text,QString File, QWidget* parent)
