@@ -21,7 +21,10 @@ QTabBar::tab:hover{
 	background-color:#00BBFF;
 }
 QTabBar::close-button{
-	
+	image:url("closeButton.svg");
+}
+QTabBar::close-button:hover{
+	background:#00EEFF;
 }
 QTreeWidget{
 	background-color:#444444;

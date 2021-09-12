@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/Tutorial">
+        <file>closeButton.svg</file>
         <file>styleSheet.qss</file>
     </qresource>
 </RCC>
