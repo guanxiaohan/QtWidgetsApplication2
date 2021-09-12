@@ -6,6 +6,11 @@
 #include <QTextCursor>
 #include <QTextCharFormat>
 #include <qmessagebox.h>
+#include <qsyntaxhighlighter.h>
+#include <qvector.h>
+#include <qregularexpression.h>
+#include <qstringliteral.h>
+#include <qstringlist.h>
 #include <QTimer>
 
 namespace Ui {
