@@ -63,7 +63,7 @@ Highlighter::Highlighter(QTextDocument* parent)
 		QStringLiteral("\\btemplate\\b"), QStringLiteral("\\btypedef\\b"), QStringLiteral("\\btypename\\b"),
 		QStringLiteral("\\bunion\\b"), QStringLiteral("\\bunsigned\\b"), QStringLiteral("\\bvirtual\\b"),
 		QStringLiteral("\\bvoid\\b"), QStringLiteral("\\bvolatile\\b"), QStringLiteral("\\bbool\\b"),
-		QStringLiteral("\\breturn\\b"),QStringLiteral("\\bnew\\b")
+		QStringLiteral("\\breturn\\b"),QStringLiteral("\\bnew\\b"),QStringLiteral("\\bauto\\b")
 	};
 	for (const QString& pattern : keywordPatterns) {
 		rule.pattern = QRegularExpression(pattern);
@@ -80,10 +80,11 @@ Highlighter::Highlighter(QTextDocument* parent)
 	rule.format = quotationFormat;
 	highlightingRules.append(rule);
 
-	functionFormat.setForeground(QBrush(QColor(qRgb(230, 255, 0))));
+	functionFormat.setForeground(QBrush(QColor(qRgb(255, 200, 100))));
 	rule.pattern = QRegularExpression(QStringLiteral("\\b[A-Za-z0-9_]+(?=\\()"));
 	rule.format = functionFormat;
 	highlightingRules.append(rule);
+
 	singleLineCommentFormat.setForeground(QBrush(QColor(qRgb(0, 200, 0))));
 	rule.pattern = QRegularExpression(QStringLiteral("//[^\n]*"));
 	rule.format = singleLineCommentFormat;
