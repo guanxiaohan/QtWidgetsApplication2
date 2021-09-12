@@ -8,11 +8,35 @@ QMenu::item:selected{
 	background-color:#555555;
 }
 QTabWidget::pane{
-	border:1px soild #0099FF;
+	border-top: 2px solid #C2C7CB;
+}
+QTabBar::tab{
+	background-color:#666666;
+	color:#FEFEFE;
+}
+QTabBar::tab:selected{
+	background-color:#0099FF;
+}
+QTabBar::tab:hover{
+	background-color:#00BBFF;
+}
+QTabBar::close-button{
+	
 }
 QTreeWidget{
 	background-color:#444444;
 }
 QHeaderView::section{
 	color:#FFFFFF;
+}
+QLabel{
+	color:#EEEEEE;
+}
+QTextEdit{
+	background-color:#222222;
+	border-width:2px;
+	border-style:soild;
+	border-color:rgb(0,150,255);
+	border-radius:3px;
+	color:#FEFEFE;
 }

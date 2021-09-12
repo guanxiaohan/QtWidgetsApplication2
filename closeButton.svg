@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: red;
+        stroke: red;
+        stroke-width: 2.778px;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="直线_1" data-name="直线 1" class="cls-1" d="M0,0L20,20Z"/>
+  <path id="直线_2" data-name="直线 2" class="cls-1" d="M20,20l-1-1Z"/>
+  <path id="直线_3" data-name="直线 3" class="cls-1" d="M20,0L0,20Z"/>
+</svg>

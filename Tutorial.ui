@@ -98,7 +98,7 @@
      <item row="1" column="1">
       <widget class="QTabWidget" name="tabWidget">
        <property name="styleSheet">
-        <string notr="true">background-color:#333333;border:0px soild #111111;margin:0px 0px 0px 0px</string>
+        <string notr="true"/>
        </property>
        <property name="tabPosition">
         <enum>QTabWidget::North</enum>

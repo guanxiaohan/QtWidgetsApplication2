@@ -149,7 +149,7 @@ public:
 
         tabWidget = new QTabWidget(gridLayoutWidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
-        tabWidget->setStyleSheet(QString::fromUtf8("background-color:#333333;border:0px soild #111111;margin:0px 0px 0px 0px"));
+        tabWidget->setStyleSheet(QString::fromUtf8(""));
         tabWidget->setTabPosition(QTabWidget::North);
         tabWidget->setTabShape(QTabWidget::Rounded);
         tabWidget->setElideMode(Qt::ElideLeft);

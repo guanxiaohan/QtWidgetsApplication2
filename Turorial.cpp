@@ -21,7 +21,7 @@ Tutorial::Tutorial(QMainWindow* parent):
 Tutorial::~Tutorial() {
 	delete ui;
 	for (int i = Tabs.size(); i > 0; i--) {
-		Tabs.removeAt((long)i - 1);
+		Tabs.removeAt(i - (long)1);
 	}
 }
 
