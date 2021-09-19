@@ -95,8 +95,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="powerShell.cpp" />
     <ClCompile Include="Turorial.cpp" />
     <QtRcc Include="Tutorial.qrc" />
+    <QtUic Include="powerShell.ui" />
     <QtUic Include="textPage.ui" />
     <QtUic Include="Tutorial.ui" />
     <ClCompile Include="textPage.cpp" />
@@ -106,6 +108,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="powerShell.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="x64\Debug\uic\ui_textPage.h" />
     <QtMoc Include="Tutorial.h" />

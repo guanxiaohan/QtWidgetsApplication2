@@ -1,4 +1,3 @@
-//yes！I log in the github and can edit!第二个更改di san ge geng gai.
 #include "textPage.h"
 
 textPage::textPage(QString Text,QString File, QWidget* parent)
@@ -64,21 +63,33 @@ Highlighter::Highlighter(QTextDocument* parent)
 		QStringLiteral("\\btemplate\\b"), QStringLiteral("\\btypedef\\b"), QStringLiteral("\\btypename\\b"),
 		QStringLiteral("\\bunion\\b"), QStringLiteral("\\bunsigned\\b"), QStringLiteral("\\bvirtual\\b"),
 		QStringLiteral("\\bvoid\\b"), QStringLiteral("\\bvolatile\\b"), QStringLiteral("\\bbool\\b"),
-		QStringLiteral("\\breturn\\b"),QStringLiteral("\\bnew\\b"),QStringLiteral("\\bauto\\b")
+		QStringLiteral("\\breturn\\b"),QStringLiteral("\\bnew\\b"),QStringLiteral("\\bauto\\b"),
+		QStringLiteral("\\bdelete\\b")
 	};
-	for (const QString& pattern : keywordPatterns) {
-		rule.pattern = QRegularExpression(pattern);
+	for (const QString& keywordPattern : keywordPatterns) {
+		rule.pattern = QRegularExpression(keywordPattern);
 		rule.format = keywordFormat;
 		highlightingRules.append(rule);
 	}
+
+	filesFormat.setForeground(QBrush(QColor(qRgb(255, 200, 0))));
+	rule.pattern = QRegularExpression("#include <.*>");
+	rule.format = filesFormat;
+	highlightingRules.append(rule);
+
+	definerFormat.setForeground(QBrush(QColor(qRgb(120, 120, 120))));
+	const QString definerPatterns[] = {
+		"#[^ ]*"
+	};
+	for (const QString& definerPattern : definerPatterns) {
+		rule.pattern = QRegularExpression(definerPattern);
+		rule.format = definerFormat;
+		highlightingRules.append(rule);
+	}
+
 	classFormat.setForeground(QBrush(QColor(qRgb(0, 100, 255))));
 	rule.pattern = QRegularExpression(QStringLiteral("\\bQ[A-Za-z]+\\b"));
 	rule.format = classFormat;
-	highlightingRules.append(rule);
-
-	quotationFormat.setForeground(Qt::darkGreen);
-	rule.pattern = QRegularExpression(QStringLiteral("\".*\""));
-	rule.format = quotationFormat;
 	highlightingRules.append(rule);
 
 	functionFormat.setForeground(QBrush(QColor(qRgb(255, 200, 100))));
