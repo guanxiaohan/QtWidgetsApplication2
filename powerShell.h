@@ -1,6 +1,8 @@
 #pragma once
 
 #include <QDockWidget>
+#include <QProcess>
+
 namespace Ui {
 	class powerShell;
 };
