@@ -52,12 +52,14 @@ public:
     QAction *actionPrint;
     QAction *actionSettings_2;
     QAction *actionQuit_2;
+    QAction *actionNew_command;
     QWidget *centralWidget;
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout;
-    QHBoxLayout *horizontalLayout;
     QTreeWidget *treeWidget;
+    QHBoxLayout *horizontalLayout;
     QTabWidget *tabWidget;
+    QTabWidget *CmdTabWidget;
     QMenuBar *menuBar;
     QMenu *menu_File;
     QMenu *menuEdit;
@@ -118,6 +120,8 @@ public:
         actionSettings_2->setObjectName(QString::fromUtf8("actionSettings_2"));
         actionQuit_2 = new QAction(Tutorial);
         actionQuit_2->setObjectName(QString::fromUtf8("actionQuit_2"));
+        actionNew_command = new QAction(Tutorial);
+        actionNew_command->setObjectName(QString::fromUtf8("actionNew_command"));
         centralWidget = new QWidget(Tutorial);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayoutWidget = new QWidget(centralWidget);
@@ -128,13 +132,6 @@ public:
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(2, 2, 2, 2);
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(6);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        horizontalLayout->setContentsMargins(2, 2, 2, 2);
-
-        gridLayout->addLayout(horizontalLayout, 0, 0, 1, 2);
-
         treeWidget = new QTreeWidget(gridLayoutWidget);
         treeWidget->setObjectName(QString::fromUtf8("treeWidget"));
         treeWidget->setMinimumSize(QSize(150, 0));
@@ -145,7 +142,14 @@ public:
         treeWidget->setColumnCount(1);
         treeWidget->header()->setVisible(true);
 
-        gridLayout->addWidget(treeWidget, 1, 0, 3, 1);
+        gridLayout->addWidget(treeWidget, 1, 0, 1, 1);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setContentsMargins(2, 2, 2, 2);
+
+        gridLayout->addLayout(horizontalLayout, 0, 0, 1, 2);
 
         tabWidget = new QTabWidget(gridLayoutWidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
@@ -156,6 +160,15 @@ public:
         tabWidget->setTabsClosable(true);
 
         gridLayout->addWidget(tabWidget, 1, 1, 1, 1);
+
+        CmdTabWidget = new QTabWidget(gridLayoutWidget);
+        CmdTabWidget->setObjectName(QString::fromUtf8("CmdTabWidget"));
+        CmdTabWidget->setTabPosition(QTabWidget::South);
+        CmdTabWidget->setTabShape(QTabWidget::Triangular);
+        CmdTabWidget->setTabsClosable(true);
+        CmdTabWidget->setTabBarAutoHide(false);
+
+        gridLayout->addWidget(CmdTabWidget, 2, 0, 1, 2);
 
         Tutorial->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(Tutorial);
@@ -177,6 +190,7 @@ public:
         menu_File->addAction(actionNew);
         menu_File->addAction(actionNew_folder);
         menu_File->addAction(actionNew_window);
+        menu_File->addAction(actionNew_command);
         menu_File->addSeparator();
         menu_File->addAction(actionOpen_file);
         menu_File->addAction(actionOpen_folder);
@@ -236,6 +250,7 @@ public:
         actionPrint->setText(QCoreApplication::translate("Tutorial", "Print...", nullptr));
         actionSettings_2->setText(QCoreApplication::translate("Tutorial", "Settings...", nullptr));
         actionQuit_2->setText(QCoreApplication::translate("Tutorial", "Quit", nullptr));
+        actionNew_command->setText(QCoreApplication::translate("Tutorial", "New command", nullptr));
         QTreeWidgetItem *___qtreewidgetitem = treeWidget->headerItem();
         ___qtreewidgetitem->setText(0, QCoreApplication::translate("Tutorial", "Folder", nullptr));
         menu_File->setTitle(QCoreApplication::translate("Tutorial", "&File", nullptr));

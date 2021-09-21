@@ -1,13 +1,14 @@
 #pragma once
 
-#include <QDockWidget>
+#include <QWidget>
 #include <QProcess>
+#include <QPushButton>
 
 namespace Ui {
 	class powerShell;
 };
 
-class powerShell : public QDockWidget
+class powerShell : public QWidget
 {
 	Q_OBJECT
 
@@ -17,4 +18,11 @@ public:
 
 private:
 	Ui::powerShell *ui;
+	QProcess mProcess;
+
+private slots:
+	void slot_readdata();
+	void slot_cmderror();
+	void slot_cmdfinished();
+	void on_lineEdit_editingFinished();
 };

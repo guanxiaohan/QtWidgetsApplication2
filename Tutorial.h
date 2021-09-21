@@ -2,6 +2,7 @@
 
 #include "ui_Tutorial.h"
 #include "textPage.h"
+#include "powerShell.h"
 #include <qmainwindow.h>
 #include <QList>
 #include <QFile>
@@ -23,6 +24,7 @@ public:
 		textPage* widget;
 	};
 	QList<textPage*> Tabs;
+	QList<powerShell*> cmdTabs;
 
 private:
 	Ui::Tutorial* ui;
@@ -30,5 +32,6 @@ private:
 
 private slots:
 	void newFile();
+	void newCommand();
 	void openFile();
 };

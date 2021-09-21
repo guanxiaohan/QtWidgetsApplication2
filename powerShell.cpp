@@ -2,25 +2,71 @@
 #include "ui_powerShell.h"
 
 powerShell::powerShell(QWidget *parent)
-	: QDockWidget(parent),
+	: QWidget(parent),
 	ui(new Ui::powerShell)
 {
 	ui->setupUi(this);
 
 	ui->textEdit->clear();
-	QProcess PowerShell(this);
-	PowerShell.setProgram("powershell");
-	QStringList argument;
-	argument << "/c" << ui->lineEdit->text();
-	PowerShell.setArguments(argument);
-	PowerShell.start();
-	PowerShell.waitForStarted(); //等待程序启动
-	PowerShell.waitForFinished();//等待程序关闭
-	QString temp = QString::fromLocal8Bit(process.readAllStandardOutput()); //程序输出信息
-	ui->textEdit->setText(temp);
+	mProcess.setProcessChannelMode(QProcess::MergedChannels);
+
+	//connect...
+	connect(&mProcess, SIGNAL(readyRead()), this, SLOT(slot_readdata()));
+	connect(&mProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(slot_readdata()));
+	connect(&mProcess, SIGNAL(errorOccurred(QProcess::ProcessError)), this, SLOT(slot_cmderror()));
+	connect(&mProcess, SIGNAL(finished(int)), this, SLOT(slot_cmdfinished()));
+	connect(ui->toolButton_4, &QPushButton::clicked, this, &powerShell::on_lineEdit_editingFinished);
+
+	//异步启动
+	setLayout(ui->gridLayout);
+	mProcess.start("cmd");
+	if (!mProcess.waitForStarted()) {
+		qDebug() << "process error " << QString::fromLocal8Bit(mProcess.readAllStandardError());
+	}
+	else {
+		qDebug() << "process read " << QString::fromLocal8Bit(mProcess.readAllStandardOutput());
+	}
+
 }
 
 powerShell::~powerShell()
 {
 	delete ui;
+}
+
+void powerShell::slot_readdata() {
+
+	QByteArray mreaddata = mProcess.readAll();
+	ui->textEdit->append(QString::fromLocal8Bit(mreaddata));
+	ui->textEdit->update();
+
+	qDebug() << "Success to read:" << QString::fromLocal8Bit(mreaddata) << "\n";
+}
+void powerShell::slot_cmdfinished() {
+	/* 接收数据 */
+	int flag = mProcess.exitCode();
+
+	/* 信息输出 */
+	qDebug() << "Cmd finish:" << flag << "\n";
+}
+
+void powerShell::slot_cmderror() {
+	int errorcode = mProcess.exitCode();
+
+	QString error = mProcess.errorString();
+
+	ui->textEdit->append(QString("Process error coed:%1").arg(errorcode));
+	ui->textEdit->append(error);
+
+	qDebug() << "Success to read cmderror:" << error << "\n";
+}
+
+void powerShell::on_lineEdit_editingFinished()
+{
+	qDebug() << "line edit" << ui->lineEdit->text();
+	char* ch;
+	QByteArray ba = (ui->lineEdit->text() + '\r' + '\n').toLatin1();
+	ch = ba.data();
+	mProcess.write(ch);
+	mProcess.waitForBytesWritten(2000);
 }

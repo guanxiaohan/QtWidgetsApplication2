@@ -9,6 +9,7 @@ Tutorial::Tutorial(QMainWindow* parent):
 	setCentralWidget(ui->centralWidget);
 
 	connect(ui->actionNew, &QAction::triggered, this, &Tutorial::newFile);
+	connect(ui->actionNew_command, &QAction::triggered, this, &Tutorial::newCommand);
 	
 	QFile Qss("styleSheet.qss");
 	Qss.open(QFile::ReadOnly);
@@ -23,6 +24,9 @@ Tutorial::~Tutorial() {
 	for (int i = Tabs.size(); i > 0; i--) {
 		Tabs.removeAt(i - (long)1);
 	}
+	for (int i = cmdTabs.size(); i > 0; i--) {
+		cmdTabs.removeAt(i - (long)1);
+	}
 }
 
 void Tutorial::newFile() 
@@ -32,7 +36,16 @@ void Tutorial::newFile()
 	Tabs.append(unit);
 }
 
+
+
 void Tutorial::openFile()
 {
 
+}
+
+void Tutorial::newCommand()
+{
+	powerShell* unit = new powerShell();
+	ui->CmdTabWidget->addTab(unit, tr("powerShell"));
+	cmdTabs.append(unit);
 }
