@@ -59,7 +59,7 @@ Highlighter::Highlighter(QTextDocument* parent)
 		QStringLiteral("\\blong\\b"), QStringLiteral("\\bnamespace\\b"), QStringLiteral("\\boperator\\b"),
 		QStringLiteral("\\bprivate\\b"), QStringLiteral("\\bprotected\\b"), QStringLiteral("\\bpublic\\b"),
 		QStringLiteral("\\bshort\\b"), QStringLiteral("\\bsignals\\b"), QStringLiteral("\\bsigned\\b"),
-		QStringLiteral("\\bslots\\b"), QStringLiteral("\\bstatic\\b"), QStringLiteral("\\bstruct\\b"),
+		QStringLiteral("\\bstatic\\b"), QStringLiteral("\\bstruct\\b"),
 		QStringLiteral("\\btemplate\\b"), QStringLiteral("\\btypedef\\b"), QStringLiteral("\\btypename\\b"),
 		QStringLiteral("\\bunion\\b"), QStringLiteral("\\bunsigned\\b"), QStringLiteral("\\bvirtual\\b"),
 		QStringLiteral("\\bvoid\\b"), QStringLiteral("\\bvolatile\\b"), QStringLiteral("\\bbool\\b"),
@@ -88,7 +88,7 @@ Highlighter::Highlighter(QTextDocument* parent)
 	}
 
 	classFormat.setForeground(QBrush(QColor(qRgb(0, 100, 255))));
-	rule.pattern = QRegularExpression(QStringLiteral("\\bQ[A-Za-z]+\\b"));
+	rule.pattern = QRegularExpression(QStringLiteral("(?<=class )[A-Za-z0-9_]+"));
 	rule.format = classFormat;
 	highlightingRules.append(rule);
 

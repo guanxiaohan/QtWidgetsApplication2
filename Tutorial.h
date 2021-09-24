@@ -7,6 +7,10 @@
 #include <QList>
 #include <QFile>
 #include <qtextstream.h>
+#include <QFileInfo>
+#include <QDir>
+#include <QMessageBox>
+#include <QFileDialog>
 
 namespace Ui {
 	class Tutorial;
