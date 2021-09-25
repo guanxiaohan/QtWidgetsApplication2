@@ -32,7 +32,7 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>6.1.2_msvc2019_64</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>core;gui;printsupport;widgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
@@ -96,9 +96,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="powerShell.cpp" />
+    <ClCompile Include="startWizard.cpp" />
     <ClCompile Include="Turorial.cpp" />
     <QtRcc Include="Tutorial.qrc" />
     <QtUic Include="powerShell.ui" />
+    <QtUic Include="startWizard.ui" />
     <QtUic Include="textPage.ui" />
     <QtUic Include="Tutorial.ui" />
     <ClCompile Include="textPage.cpp" />
@@ -110,6 +112,7 @@
   <ItemGroup>
     <QtMoc Include="powerShell.h" />
     <ClInclude Include="resource.h" />
+    <QtMoc Include="startWizard.h" />
     <ClInclude Include="x64\Debug\uic\ui_textPage.h" />
     <QtMoc Include="Tutorial.h" />
     <QtMoc Include="textPage.h" />

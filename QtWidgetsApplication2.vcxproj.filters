@@ -43,6 +43,9 @@
     <ClCompile Include="powerShell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="startWizard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -75,12 +78,18 @@
     <QtMoc Include="powerShell.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="startWizard.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="textPage.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="powerShell.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="startWizard.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
