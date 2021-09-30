@@ -38,4 +38,6 @@ private slots:
 	void newFile();
 	void newCommand();
 	void openFile();
+	void saveFile();
+	void showCommand();
 };

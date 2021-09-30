@@ -31,7 +31,7 @@ void textPage::setUp(QString str,QString file)
 {
 	ui->fileLabel->setText(str);
 	ui->textEdit->setText(file);
-	ui->textEdit->setFont(QFont("ËÎÌå",10));
+	ui->textEdit->setFont(QFont("宋体",10));
 	auto highlighter = new Highlighter(ui->textEdit->document());
 	connect(ui->textEdit, &QTextEdit::textChanged, this, &textPage::unSave);
 	fileSaved = true;
@@ -44,6 +44,11 @@ QString textPage::GetText() {
 QString textPage::GetFile()
 {
 	return ui->fileLabel->text();
+}
+
+void textPage::setFile(QString str)
+{
+	ui->fileLabel->setText(str);
 }
 
 Highlighter::Highlighter(QTextDocument* parent)
@@ -73,7 +78,7 @@ Highlighter::Highlighter(QTextDocument* parent)
 	}
 
 	filesFormat.setForeground(QBrush(QColor(qRgb(255, 200, 0))));
-	rule.pattern = QRegularExpression("#include <.*>");
+	rule.pattern = QRegularExpression("(?<=#include)[ ]+<.*>");
 	rule.format = filesFormat;
 	highlightingRules.append(rule);
 

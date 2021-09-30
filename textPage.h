@@ -31,12 +31,13 @@ public:
 	void setUp(QString str,QString file);
 	QString GetText();
 	QString GetFile();
+    void setFile(QString);
 	bool fileSaved = true;
 	Ui::textPage* ui;
 	QTimer* timer = new QTimer();
+    QString currentFile;
 	
 private:
-	QString currentFile;
 	void unSave() { fileSaved = false; };
 };
 
