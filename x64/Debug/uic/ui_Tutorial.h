@@ -20,6 +20,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QToolButton>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -55,8 +56,9 @@ public:
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout;
     QHBoxLayout *horizontalLayout;
-    QTabWidget *tabWidget;
+    QToolButton *toolButton;
     QTabWidget *CmdTabWidget;
+    QTabWidget *tabWidget;
     QMenuBar *menuBar;
     QMenu *menu_File;
     QMenu *menuEdit;
@@ -68,7 +70,7 @@ public:
             Tutorial->setObjectName(QString::fromUtf8("Tutorial"));
         Tutorial->resize(789, 425);
         QIcon icon;
-        icon.addFile(QString::fromUtf8("bitmap1.bmp"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QString::fromUtf8("C:/Users/Lenovo/.designer/backup/bitmap1.bmp"), QSize(), QIcon::Normal, QIcon::Off);
         Tutorial->setWindowIcon(icon);
         actionNew = new QAction(Tutorial);
         actionNew->setObjectName(QString::fromUtf8("actionNew"));
@@ -132,8 +134,23 @@ public:
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(2, 2, 2, 2);
+        toolButton = new QToolButton(gridLayoutWidget);
+        toolButton->setObjectName(QString::fromUtf8("toolButton"));
+
+        horizontalLayout->addWidget(toolButton);
+
 
         gridLayout->addLayout(horizontalLayout, 0, 0, 1, 2);
+
+        CmdTabWidget = new QTabWidget(gridLayoutWidget);
+        CmdTabWidget->setObjectName(QString::fromUtf8("CmdTabWidget"));
+        CmdTabWidget->setTabPosition(QTabWidget::South);
+        CmdTabWidget->setTabShape(QTabWidget::Triangular);
+        CmdTabWidget->setTabsClosable(true);
+        CmdTabWidget->setMovable(true);
+        CmdTabWidget->setTabBarAutoHide(false);
+
+        gridLayout->addWidget(CmdTabWidget, 2, 0, 1, 2);
 
         tabWidget = new QTabWidget(gridLayoutWidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
@@ -143,16 +160,7 @@ public:
         tabWidget->setElideMode(Qt::ElideLeft);
         tabWidget->setTabsClosable(true);
 
-        gridLayout->addWidget(tabWidget, 1, 1, 1, 1);
-
-        CmdTabWidget = new QTabWidget(gridLayoutWidget);
-        CmdTabWidget->setObjectName(QString::fromUtf8("CmdTabWidget"));
-        CmdTabWidget->setTabPosition(QTabWidget::South);
-        CmdTabWidget->setTabShape(QTabWidget::Triangular);
-        CmdTabWidget->setTabsClosable(true);
-        CmdTabWidget->setTabBarAutoHide(false);
-
-        gridLayout->addWidget(CmdTabWidget, 2, 0, 1, 2);
+        gridLayout->addWidget(tabWidget, 1, 0, 1, 2);
 
         Tutorial->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(Tutorial);
@@ -210,11 +218,20 @@ public:
     {
         Tutorial->setWindowTitle(QCoreApplication::translate("Tutorial", "Tutorial", nullptr));
         actionNew->setText(QCoreApplication::translate("Tutorial", "New file", nullptr));
+#if QT_CONFIG(shortcut)
+        actionNew->setShortcut(QCoreApplication::translate("Tutorial", "Ctrl+N, Ctrl+N", nullptr));
+#endif // QT_CONFIG(shortcut)
         actionNew_folder->setText(QCoreApplication::translate("Tutorial", "New folder", nullptr));
         actionNew_window->setText(QCoreApplication::translate("Tutorial", "New window", nullptr));
         actionOpen_file->setText(QCoreApplication::translate("Tutorial", "Open file...", nullptr));
+#if QT_CONFIG(shortcut)
+        actionOpen_file->setShortcut(QCoreApplication::translate("Tutorial", "Ctrl+O", nullptr));
+#endif // QT_CONFIG(shortcut)
         actionOpen_folder->setText(QCoreApplication::translate("Tutorial", "Open folder", nullptr));
         actionSave->setText(QCoreApplication::translate("Tutorial", "Save file", nullptr));
+#if QT_CONFIG(shortcut)
+        actionSave->setShortcut(QCoreApplication::translate("Tutorial", "Ctrl+S", nullptr));
+#endif // QT_CONFIG(shortcut)
         actionSave_file_as->setText(QCoreApplication::translate("Tutorial", "Save file as...", nullptr));
         actionSave_folder->setText(QCoreApplication::translate("Tutorial", "Save folder", nullptr));
         actionSave_folder_as->setText(QCoreApplication::translate("Tutorial", "Save folder as...", nullptr));
@@ -230,9 +247,16 @@ public:
         actionFont->setText(QCoreApplication::translate("Tutorial", "Font...", nullptr));
         actionSettings->setText(QCoreApplication::translate("Tutorial", "Settings", nullptr));
         actionPrint->setText(QCoreApplication::translate("Tutorial", "Print...", nullptr));
+#if QT_CONFIG(shortcut)
+        actionPrint->setShortcut(QCoreApplication::translate("Tutorial", "Ctrl+P", nullptr));
+#endif // QT_CONFIG(shortcut)
         actionSettings_2->setText(QCoreApplication::translate("Tutorial", "Settings...", nullptr));
         actionQuit_2->setText(QCoreApplication::translate("Tutorial", "Quit", nullptr));
         actionNew_command->setText(QCoreApplication::translate("Tutorial", "New command", nullptr));
+#if QT_CONFIG(shortcut)
+        actionNew_command->setShortcut(QCoreApplication::translate("Tutorial", "Ctrl+N, Ctrl+C", nullptr));
+#endif // QT_CONFIG(shortcut)
+        toolButton->setText(QCoreApplication::translate("Tutorial", "...", nullptr));
         menu_File->setTitle(QCoreApplication::translate("Tutorial", "&File", nullptr));
         menuEdit->setTitle(QCoreApplication::translate("Tutorial", "Edit", nullptr));
     } // retranslateUi
