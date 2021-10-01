@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.31605.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtWidgetsApplication2", "QtWidgetsApplication2.vcxproj", "{EDC30505-EE94-4F8C-93E6-4C426B082EDF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppTemplate", "..\CppTemplate\CppTemplate.vcxproj", "{E94671A2-9A20-4B96-A45F-9908B7778F25}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,14 +19,6 @@ Global
 		{EDC30505-EE94-4F8C-93E6-4C426B082EDF}.Release|x64.ActiveCfg = Release|x64
 		{EDC30505-EE94-4F8C-93E6-4C426B082EDF}.Release|x64.Build.0 = Release|x64
 		{EDC30505-EE94-4F8C-93E6-4C426B082EDF}.Release|x86.ActiveCfg = Release|x64
-		{E94671A2-9A20-4B96-A45F-9908B7778F25}.Debug|x64.ActiveCfg = Debug|x64
-		{E94671A2-9A20-4B96-A45F-9908B7778F25}.Debug|x64.Build.0 = Debug|x64
-		{E94671A2-9A20-4B96-A45F-9908B7778F25}.Debug|x86.ActiveCfg = Debug|Win32
-		{E94671A2-9A20-4B96-A45F-9908B7778F25}.Debug|x86.Build.0 = Debug|Win32
-		{E94671A2-9A20-4B96-A45F-9908B7778F25}.Release|x64.ActiveCfg = Release|x64
-		{E94671A2-9A20-4B96-A45F-9908B7778F25}.Release|x64.Build.0 = Release|x64
-		{E94671A2-9A20-4B96-A45F-9908B7778F25}.Release|x86.ActiveCfg = Release|Win32
-		{E94671A2-9A20-4B96-A45F-9908B7778F25}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

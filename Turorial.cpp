@@ -13,7 +13,7 @@ Tutorial::Tutorial(QMainWindow* parent):
 	connect(ui->actionNew_command, &QAction::triggered, this, &Tutorial::newCommand);
 	connect(ui->actionOpen_file, &QAction::triggered, this, &Tutorial::openFile);
 	connect(ui->actionSave, &QAction::triggered, this, &Tutorial::saveFile);
-	//connect(ui->CmdTabWidget, &QTabWidget::, this, &Tutorial::showCommand);
+	connect(ui->actionNew_command, &QAction::triggered, this, &Tutorial::showCommand);
 		
 	QFile Qss("styleSheet.qss");
 	Qss.open(QFile::ReadOnly);
@@ -26,7 +26,7 @@ Tutorial::Tutorial(QMainWindow* parent):
 Tutorial::~Tutorial() {
 	delete ui;
 	for (int i = Tabs.size(); i > 0; i--) {
-		Tabs.removeAt(i - (int)1);
+		Tabs.removeAt(i - 1);
 	}
 	for (int i = cmdTabs.size(); i > 0; i--) {
 		cmdTabs.removeAt(i - (int)1);
