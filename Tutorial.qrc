@@ -2,5 +2,6 @@
     <qresource prefix="/Tutorial">
         <file>closeButton.svg</file>
         <file>styleSheet.qss</file>
+        <file>save.png</file>
     </qresource>
 </RCC>

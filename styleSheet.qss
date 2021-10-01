@@ -1,8 +1,16 @@
 QMainWindow{
 	background-color:#555555;
 }
+QMenuBar{
+	background:#444444;
+	color:#FCFCFC;
+}
 QMenuBar::item:selected{
 	background-color:#555555
+}
+QMenu{
+	background:#444444;
+	color:#FCFCFC;
 }
 QMenu::item:selected{
 	background-color:#555555;
@@ -39,7 +47,7 @@ QTreeWidget{
 	background-color:#444444;
 }
 QHeaderView::section{
-	color:#FFFFFF;
+	color:#000000;
 }
 QLabel{
 	color:#EEEEEE;
@@ -51,4 +59,12 @@ QTextEdit{
 	border-color:rgb(0,150,255);
 	border-radius:3px;
 	color:#FEFEFE;
+}
+QStatusBar{
+	background-color:#0088FF;
+	color:#FCFCFC;
+}
+QMessageBox{
+    background-color:#333333;
+	color:#EEEEEE;
 }

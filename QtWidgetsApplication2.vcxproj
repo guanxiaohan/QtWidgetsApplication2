@@ -130,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="bitmap1.bmp" />
+    <Image Include="F:\save.png" />
     <Image Include="icon1.ico" />
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@ textPage::textPage(QString Text,QString File, QWidget* parent)
 	ui->setupUi(this);
 	setUp(Text,File);
 	setLayout(ui->Layout);
-	currentFile = File;
+	currentFile = Text;
 }
 
 textPage::textPage(QWidget* parent)

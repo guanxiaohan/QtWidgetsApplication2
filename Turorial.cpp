@@ -14,6 +14,7 @@ Tutorial::Tutorial(QMainWindow* parent):
 	connect(ui->actionOpen_file, &QAction::triggered, this, &Tutorial::openFile);
 	connect(ui->actionSave, &QAction::triggered, this, &Tutorial::saveFile);
 	connect(ui->actionNew_command, &QAction::triggered, this, &Tutorial::showCommand);
+	connect(ui->actionPrint, &QAction::triggered, this, &Tutorial::printCode);
 		
 	QFile Qss("styleSheet.qss");
 	Qss.open(QFile::ReadOnly);
@@ -29,7 +30,7 @@ Tutorial::~Tutorial() {
 		Tabs.removeAt(i - 1);
 	}
 	for (int i = cmdTabs.size(); i > 0; i--) {
-		cmdTabs.removeAt(i - (int)1);
+		cmdTabs.removeAt((long)i - (long)1);
 	}
 }
 
@@ -52,6 +53,7 @@ void Tutorial::openFile()
 			content = out.readAll();
 			textPage* unit = new textPage(fileName, content);
 			ui->tabWidget->addTab(unit, QFileInfo(fileName).fileName());
+			QMessageBox::information(this, "Debug", "File:" + fileName + " Text:\n" + content);
 			Tabs.append(unit);
 			file.close();
 		}
@@ -71,11 +73,12 @@ void Tutorial::newCommand()
 void Tutorial::saveFile()
 {
 	if (Tabs[ui->tabWidget->currentIndex()]->currentFile.isEmpty()) {
-		Tabs[ui->tabWidget->currentIndex()]->currentFile = QFileDialog::getSaveFileName(this, "Save file to:", "./", "Text file(*.txt);;C++ files(*.cpp;*.h)");
+		Tabs[ui->tabWidget->currentIndex()]->currentFile = QFileDialog::getSaveFileName(this, "Save file to:", "./", "All files(*.*);;Text file(*.txt);;C++ files(*.cpp;*.h)");
 		if (Tabs[ui->tabWidget->currentIndex()]->currentFile.isEmpty())return;
 	}
 	QString fileName = Tabs[ui->tabWidget->currentIndex()]->currentFile;
 	QFile file(fileName);
+	QMessageBox::information(this, "Debug", "File:" + fileName);
 	if (file.open(QFile::WriteOnly)) {
 		QString fileText = Tabs[ui->tabWidget->currentIndex()]->GetText();
 		file.write(fileText.toStdString().data());
@@ -93,4 +96,11 @@ void Tutorial::saveFile()
 void Tutorial::showCommand()
 {
 	ui->CmdTabWidget->show();
+}
+
+void Tutorial::printCode()
+{
+	QPrinter printer;
+	QPrintDialog pDialog(&printer, this);
+	pDialog.exec();
 }

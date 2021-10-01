@@ -19,7 +19,7 @@ powerShell::powerShell(QWidget *parent)
 
 	//Òì²½Æô¶¯
 	setLayout(ui->gridLayout);
-	mProcess.start("cmd");
+	mProcess.start("powershell");
 	if (!mProcess.waitForStarted()) {
 		qDebug() << "process error " << QString::fromLocal8Bit(mProcess.readAllStandardError());
 	}
@@ -37,7 +37,7 @@ powerShell::~powerShell()
 void powerShell::slot_readdata() {
 
 	QByteArray mreaddata = mProcess.readAll();
-	ui->textEdit->append(QString::fromLocal8Bit(mreaddata));
+	ui->textEdit->setText(ui->textEdit->toPlainText() + QString::fromLocal8Bit(mreaddata));
 	ui->textEdit->update();
 
 	qDebug() << "Success to read:" << QString::fromLocal8Bit(mreaddata) << "\n";

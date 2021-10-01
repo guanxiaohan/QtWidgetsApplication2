@@ -11,6 +11,8 @@
 #include <QDir>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QPrinter>
+#include <QPrintDialog>
 
 namespace Ui {
 	class Tutorial;
@@ -40,4 +42,5 @@ private slots:
 	void openFile();
 	void saveFile();
 	void showCommand();
+	void printCode();
 };
