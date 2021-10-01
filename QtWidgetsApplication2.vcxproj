@@ -104,6 +104,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="powerShell.cpp" />
+    <ClCompile Include="Projecter.cpp" />
     <ClCompile Include="startWizard.cpp" />
     <ClCompile Include="Turorial.cpp" />
     <QtRcc Include="Tutorial.qrc" />
@@ -119,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="powerShell.h" />
+    <ClInclude Include="Projecter.h" />
     <ClInclude Include="resource.h" />
     <QtMoc Include="startWizard.h" />
     <ClInclude Include="x64\Debug\uic\ui_textPage.h" />
