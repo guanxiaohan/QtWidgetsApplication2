@@ -60,23 +60,27 @@ Projecter::~Projecter()
 
 Projecter::File Projecter::addFile(QString fileName, fileTypes fileType = fileTypes::Unset, int fileId = -1)
 {
-	if (fileId = -1) {
+	if (fileId == -1) {
 		fileId = ProjectFiles.count();
 	}
 	ProjectFiles.append(File(fileName, fileType, fileId));
+	return File(fileName, fileType, fileId);
 }
 
 Projecter::File Projecter::removeFile(QString fileName)
 {
+	/*
 	for (auto i : ProjectFiles) {
 		if (i.FileName == fileName) {
 			ProjectFiles.removeOne(i);
 		}
-	}
+	}*/
+	return File();
 }
 
 Projecter::File Projecter::removeFile(int fileId)
 {
+	/*
 	for (auto i : ProjectFiles) {
 		if (i.fileId == fileId) {
 			ProjectFiles.removeOne(i);
@@ -84,10 +88,13 @@ Projecter::File Projecter::removeFile(int fileId)
 			break; 
 		}
 	}
+	*/
+	return File();
 }
 
 QList<Projecter::File> Projecter::removeFiles(fileTypes type)
 {
+	/*
 	QList<Projecter::File> file_list;
 	for (auto i : ProjectFiles) {
 		if (i.FileType == type) {
@@ -95,11 +102,13 @@ QList<Projecter::File> Projecter::removeFiles(fileTypes type)
 			ProjectFiles.removeOne(i);
 		}
 	}
-	return file_list;
+	return file_list;*/
+	return QList<File>();
 }
 
 QList<Projecter::File> Projecter::removeFiles(QList<fileTypes> types)
 {
+	/*
 	QList<Projecter::File> file_list;
 	for (auto i : ProjectFiles) {
 		for (auto j : types) {
@@ -109,7 +118,8 @@ QList<Projecter::File> Projecter::removeFiles(QList<fileTypes> types)
 			}
 		}
 	}
-	return file_list;
+	return file_list;*/
+	return QList<File>();
 }
 
 bool Projecter::setFile(int fileId, QString fileName)
@@ -122,7 +132,7 @@ bool Projecter::setFile(int fileId, QString fileName)
 	}
 	return false;
 }
-
+/*
 Projecter::File Projecter::fileAt(int fileId)
 {
 	for (auto i : ProjectFiles) {
@@ -148,7 +158,7 @@ int Projecter::idOf(QString fileName, fileTypes type)
 {
 	return 0;
 }
-
+*/
 QList<Projecter::File> Projecter::allFiles()
 {
 	return ProjectFiles;

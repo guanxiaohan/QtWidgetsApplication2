@@ -37,12 +37,12 @@ public:
 	QList<File> removeFiles(fileTypes type);
 	QList<File> removeFiles(QList<fileTypes> types);
 	bool setFile(int fileId, QString fileName);
-
+	/*
 	File fileAt(int fileId);
 	QList<File> filesOfType(fileTypes type);
 	int idOf(File file);
 	int idOf(QString fileName, fileTypes type = Unknown);
-
+	*/
 	QList<File> allFiles();
 };
 

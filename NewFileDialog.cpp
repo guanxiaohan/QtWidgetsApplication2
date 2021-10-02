@@ -30,7 +30,12 @@ QList<QString> NewFileDialog::getNewFile(QList<QString> options)
 	dialog.exec();
 
 	if (!res.isEmpty()) {
-
+		auto args = res.split("//");
+		QList<QString> list;
+		list.append(args[0]);
+		list.append(args[1]);
+		list.append(args[2]);
+		return list;
 	}
 }
 
@@ -42,7 +47,7 @@ void NewFileDialog::Confirm()
 	{
 		if (QDir(ui->dirLineEdit->text()).exists()) {
 			Result =
-				ui->listWidget->currentItem()->text() +
+				QString::number(ui->listWidget->currentRow()) +
 				"//" +
 				ui->fileNameLineEdit->text() +
 				"//" +
@@ -62,4 +67,9 @@ void NewFileDialog::Cancel()
 {
 	Result = "";
 	setHidden(true);
+}
+
+void NewFileDialog::SetDir() 
+{
+	ui->dirLineEdit->setText(QFileDialog::getExistingDirectory(this, "File in:"));
 }

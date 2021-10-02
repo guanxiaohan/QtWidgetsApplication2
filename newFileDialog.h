@@ -25,4 +25,5 @@ private:
 private slots:
 	void Confirm();
 	void Cancel();
+	void SetDir();
 };
