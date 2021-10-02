@@ -8,10 +8,13 @@ Tutorial::Tutorial(QMainWindow* parent):
 	ui->centralWidget->setLayout(ui->gridLayout);
 	setCentralWidget(ui->centralWidget);
 	ui->CmdTabWidget->setHidden(true);
+	ui->gridLayoutWidget_2->setLayout(ui->gridLayout_2);
+	ui->ProjectViewer->setWidget(ui->gridLayoutWidget_2);
 
 	connect(ui->actionNew, &QAction::triggered, this, &Tutorial::newFile);
 	connect(ui->actionNew_command, &QAction::triggered, this, &Tutorial::newCommand);
 	connect(ui->actionOpen_file, &QAction::triggered, this, &Tutorial::openFile);
+	connect(ui->actionOpen_project, &QAction::triggered, this, &Tutorial::openProject);
 	connect(ui->actionSave, &QAction::triggered, this, &Tutorial::saveFile);
 	connect(ui->actionNew_command, &QAction::triggered, this, &Tutorial::showCommand);
 	connect(ui->actionPrint, &QAction::triggered, this, &Tutorial::printCode);
@@ -103,4 +106,18 @@ void Tutorial::printCode()
 	QPrinter printer;
 	QPrintDialog pDialog(&printer, this);
 	pDialog.exec();
+}
+
+void Tutorial::openProject()
+{
+	auto projectDir = QFileDialog::getOpenFileName(this, "Open project, from project file:*.iep:", "./", "IDLE Project(*.iep)");
+	Projecter* project = new Projecter(projectDir);
+	auto fileList = project->allFiles();
+	for (auto i : fileList) {
+		auto item = new QTreeWidgetItem(ui->treeWidget);
+		item->setText(0, i.FileName);
+		ProjectFilesItem.append(item);
+		ui->treeWidget->update();
+	}
+	//Not all.
 }

@@ -4,7 +4,7 @@ Projecter::Projecter(QString fileUrl)
 {
 	QFile file(fileUrl);
 	QTextStream out(&file);
-	if (QFileInfo(fileUrl).suffix().toLower() == QString(".iep")) {
+	if (/*QFileInfo(fileUrl).suffix().toLower() == QString(".iep")*/true) {
 		if (file.open(QFile::ReadOnly)) {
 			QString ProjectText = out.readAll();
 			file.close();
@@ -40,7 +40,7 @@ Projecter::Projecter(QString fileUrl)
 				//Not all, add it later.
 				}
 				m_file.fileId = FileArguments[2].toInt();
-
+				ProjectFiles.append(m_file);
 			}
 		}
 		else {
@@ -108,5 +108,5 @@ int Projecter::idOf(QString fileName, fileTypes type)
 
 QList<Projecter::File> Projecter::allFiles()
 {
-	return QList<File>();
+	return ProjectFiles;
 }

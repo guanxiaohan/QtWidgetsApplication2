@@ -1,6 +1,9 @@
 QMainWindow{
 	background-color:#555555;
 }
+QTreeWidget{
+	color:#FCFCFC;
+}
 QMenuBar{
 	background:#444444;
 	color:#FCFCFC;

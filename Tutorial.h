@@ -3,6 +3,7 @@
 #include "ui_Tutorial.h"
 #include "textPage.h"
 #include "powerShell.h"
+#include "Projecter.h"
 #include <qmainwindow.h>
 #include <QList>
 #include <QFile>
@@ -13,6 +14,7 @@
 #include <QFileDialog>
 #include <QPrinter>
 #include <QPrintDialog>
+#include <QTreeWidgetItem>
 
 namespace Ui {
 	class Tutorial;
@@ -35,11 +37,14 @@ public:
 private:
 	Ui::Tutorial* ui;
 	textPage* currentTab;
+	Projecter* project;
+	QList<QTreeWidgetItem*> ProjectFilesItem;
 
 private slots:
 	void newFile();
 	void newCommand();
 	void openFile();
+	void openProject();
 	void saveFile();
 	void showCommand();
 	void printCode();

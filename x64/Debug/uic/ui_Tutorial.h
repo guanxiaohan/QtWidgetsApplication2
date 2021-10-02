@@ -13,14 +13,18 @@
 #include <QtGui/QAction>
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QDockWidget>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QToolButton>
+#include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -29,10 +33,10 @@ class Ui_Tutorial
 {
 public:
     QAction *actionNew;
-    QAction *actionNew_folder;
+    QAction *actionNew_project;
     QAction *actionNew_window;
     QAction *actionOpen_file;
-    QAction *actionOpen_folder;
+    QAction *actionOpen_project;
     QAction *actionSave;
     QAction *actionSave_file_as;
     QAction *actionSave_folder;
@@ -52,17 +56,27 @@ public:
     QAction *actionSettings_2;
     QAction *actionQuit_2;
     QAction *actionNew_command;
+    QAction *actionProject_Viewer;
     QWidget *centralWidget;
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout;
+    QTabWidget *CmdTabWidget;
     QHBoxLayout *horizontalLayout;
     QToolButton *toolButton;
-    QTabWidget *CmdTabWidget;
     QTabWidget *tabWidget;
     QMenuBar *menuBar;
     QMenu *menu_File;
     QMenu *menuEdit;
+    QMenu *menuViews;
     QStatusBar *statusBar;
+    QDockWidget *ProjectViewer;
+    QWidget *dockWidgetContents_2;
+    QWidget *gridLayoutWidget_2;
+    QGridLayout *gridLayout_2;
+    QToolButton *actionProject_delete;
+    QToolButton *actionProject_new;
+    QPushButton *actionProject_options;
+    QTreeWidget *treeWidget;
 
     void setupUi(QMainWindow *Tutorial)
     {
@@ -74,14 +88,14 @@ public:
         Tutorial->setWindowIcon(icon);
         actionNew = new QAction(Tutorial);
         actionNew->setObjectName(QString::fromUtf8("actionNew"));
-        actionNew_folder = new QAction(Tutorial);
-        actionNew_folder->setObjectName(QString::fromUtf8("actionNew_folder"));
+        actionNew_project = new QAction(Tutorial);
+        actionNew_project->setObjectName(QString::fromUtf8("actionNew_project"));
         actionNew_window = new QAction(Tutorial);
         actionNew_window->setObjectName(QString::fromUtf8("actionNew_window"));
         actionOpen_file = new QAction(Tutorial);
         actionOpen_file->setObjectName(QString::fromUtf8("actionOpen_file"));
-        actionOpen_folder = new QAction(Tutorial);
-        actionOpen_folder->setObjectName(QString::fromUtf8("actionOpen_folder"));
+        actionOpen_project = new QAction(Tutorial);
+        actionOpen_project->setObjectName(QString::fromUtf8("actionOpen_project"));
         actionSave = new QAction(Tutorial);
         actionSave->setObjectName(QString::fromUtf8("actionSave"));
         actionSave_file_as = new QAction(Tutorial);
@@ -120,6 +134,8 @@ public:
         actionQuit_2->setObjectName(QString::fromUtf8("actionQuit_2"));
         actionNew_command = new QAction(Tutorial);
         actionNew_command->setObjectName(QString::fromUtf8("actionNew_command"));
+        actionProject_Viewer = new QAction(Tutorial);
+        actionProject_Viewer->setObjectName(QString::fromUtf8("actionProject_Viewer"));
         centralWidget = new QWidget(Tutorial);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayoutWidget = new QWidget(centralWidget);
@@ -130,6 +146,16 @@ public:
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(2, 2, 2, 2);
+        CmdTabWidget = new QTabWidget(gridLayoutWidget);
+        CmdTabWidget->setObjectName(QString::fromUtf8("CmdTabWidget"));
+        CmdTabWidget->setTabPosition(QTabWidget::South);
+        CmdTabWidget->setTabShape(QTabWidget::Triangular);
+        CmdTabWidget->setTabsClosable(true);
+        CmdTabWidget->setMovable(true);
+        CmdTabWidget->setTabBarAutoHide(false);
+
+        gridLayout->addWidget(CmdTabWidget, 2, 0, 1, 3);
+
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
@@ -140,17 +166,7 @@ public:
         horizontalLayout->addWidget(toolButton);
 
 
-        gridLayout->addLayout(horizontalLayout, 0, 0, 1, 2);
-
-        CmdTabWidget = new QTabWidget(gridLayoutWidget);
-        CmdTabWidget->setObjectName(QString::fromUtf8("CmdTabWidget"));
-        CmdTabWidget->setTabPosition(QTabWidget::South);
-        CmdTabWidget->setTabShape(QTabWidget::Triangular);
-        CmdTabWidget->setTabsClosable(true);
-        CmdTabWidget->setMovable(true);
-        CmdTabWidget->setTabBarAutoHide(false);
-
-        gridLayout->addWidget(CmdTabWidget, 2, 0, 1, 2);
+        gridLayout->addLayout(horizontalLayout, 0, 0, 1, 3);
 
         tabWidget = new QTabWidget(gridLayoutWidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
@@ -160,7 +176,7 @@ public:
         tabWidget->setElideMode(Qt::ElideLeft);
         tabWidget->setTabsClosable(true);
 
-        gridLayout->addWidget(tabWidget, 1, 0, 1, 2);
+        gridLayout->addWidget(tabWidget, 1, 0, 1, 3);
 
         Tutorial->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(Tutorial);
@@ -170,20 +186,60 @@ public:
         menu_File->setObjectName(QString::fromUtf8("menu_File"));
         menuEdit = new QMenu(menuBar);
         menuEdit->setObjectName(QString::fromUtf8("menuEdit"));
+        menuViews = new QMenu(menuBar);
+        menuViews->setObjectName(QString::fromUtf8("menuViews"));
         Tutorial->setMenuBar(menuBar);
         statusBar = new QStatusBar(Tutorial);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         Tutorial->setStatusBar(statusBar);
+        ProjectViewer = new QDockWidget(Tutorial);
+        ProjectViewer->setObjectName(QString::fromUtf8("ProjectViewer"));
+        ProjectViewer->setFloating(false);
+        ProjectViewer->setFeatures(QDockWidget::DockWidgetClosable|QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable);
+        dockWidgetContents_2 = new QWidget();
+        dockWidgetContents_2->setObjectName(QString::fromUtf8("dockWidgetContents_2"));
+        gridLayoutWidget_2 = new QWidget(dockWidgetContents_2);
+        gridLayoutWidget_2->setObjectName(QString::fromUtf8("gridLayoutWidget_2"));
+        gridLayoutWidget_2->setGeometry(QRect(-1, -1, 191, 351));
+        gridLayout_2 = new QGridLayout(gridLayoutWidget_2);
+        gridLayout_2->setSpacing(6);
+        gridLayout_2->setContentsMargins(11, 11, 11, 11);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        gridLayout_2->setContentsMargins(0, 0, 0, 0);
+        actionProject_delete = new QToolButton(gridLayoutWidget_2);
+        actionProject_delete->setObjectName(QString::fromUtf8("actionProject_delete"));
+
+        gridLayout_2->addWidget(actionProject_delete, 0, 0, 1, 1);
+
+        actionProject_new = new QToolButton(gridLayoutWidget_2);
+        actionProject_new->setObjectName(QString::fromUtf8("actionProject_new"));
+
+        gridLayout_2->addWidget(actionProject_new, 0, 1, 1, 1);
+
+        actionProject_options = new QPushButton(gridLayoutWidget_2);
+        actionProject_options->setObjectName(QString::fromUtf8("actionProject_options"));
+
+        gridLayout_2->addWidget(actionProject_options, 0, 2, 1, 1);
+
+        treeWidget = new QTreeWidget(gridLayoutWidget_2);
+        treeWidget->setObjectName(QString::fromUtf8("treeWidget"));
+        treeWidget->header()->setVisible(false);
+
+        gridLayout_2->addWidget(treeWidget, 1, 0, 1, 3);
+
+        ProjectViewer->setWidget(dockWidgetContents_2);
+        Tutorial->addDockWidget(Qt::RightDockWidgetArea, ProjectViewer);
 
         menuBar->addAction(menu_File->menuAction());
         menuBar->addAction(menuEdit->menuAction());
+        menuBar->addAction(menuViews->menuAction());
         menu_File->addAction(actionNew);
-        menu_File->addAction(actionNew_folder);
+        menu_File->addAction(actionNew_project);
         menu_File->addAction(actionNew_window);
         menu_File->addAction(actionNew_command);
         menu_File->addSeparator();
         menu_File->addAction(actionOpen_file);
-        menu_File->addAction(actionOpen_folder);
+        menu_File->addAction(actionOpen_project);
         menu_File->addSeparator();
         menu_File->addAction(actionSave);
         menu_File->addAction(actionSave_file_as);
@@ -205,6 +261,7 @@ public:
         menuEdit->addAction(actionPaste);
         menuEdit->addSeparator();
         menuEdit->addAction(actionFont);
+        menuViews->addAction(actionProject_Viewer);
 
         retranslateUi(Tutorial);
 
@@ -221,13 +278,19 @@ public:
 #if QT_CONFIG(shortcut)
         actionNew->setShortcut(QCoreApplication::translate("Tutorial", "Ctrl+N, Ctrl+N", nullptr));
 #endif // QT_CONFIG(shortcut)
-        actionNew_folder->setText(QCoreApplication::translate("Tutorial", "New folder", nullptr));
+        actionNew_project->setText(QCoreApplication::translate("Tutorial", "New project", nullptr));
+#if QT_CONFIG(shortcut)
+        actionNew_project->setShortcut(QCoreApplication::translate("Tutorial", "Ctrl+N, Ctrl+P", nullptr));
+#endif // QT_CONFIG(shortcut)
         actionNew_window->setText(QCoreApplication::translate("Tutorial", "New window", nullptr));
         actionOpen_file->setText(QCoreApplication::translate("Tutorial", "Open file...", nullptr));
 #if QT_CONFIG(shortcut)
-        actionOpen_file->setShortcut(QCoreApplication::translate("Tutorial", "Ctrl+O", nullptr));
+        actionOpen_file->setShortcut(QCoreApplication::translate("Tutorial", "Ctrl+O, Ctrl+F", nullptr));
 #endif // QT_CONFIG(shortcut)
-        actionOpen_folder->setText(QCoreApplication::translate("Tutorial", "Open folder", nullptr));
+        actionOpen_project->setText(QCoreApplication::translate("Tutorial", "Open project", nullptr));
+#if QT_CONFIG(shortcut)
+        actionOpen_project->setShortcut(QCoreApplication::translate("Tutorial", "Ctrl+O, Ctrl+P", nullptr));
+#endif // QT_CONFIG(shortcut)
         actionSave->setText(QCoreApplication::translate("Tutorial", "Save file", nullptr));
 #if QT_CONFIG(shortcut)
         actionSave->setShortcut(QCoreApplication::translate("Tutorial", "Ctrl+S", nullptr));
@@ -236,7 +299,7 @@ public:
         actionSave_folder->setText(QCoreApplication::translate("Tutorial", "Save folder", nullptr));
         actionSave_folder_as->setText(QCoreApplication::translate("Tutorial", "Save folder as...", nullptr));
         actionClose_file->setText(QCoreApplication::translate("Tutorial", "Close file", nullptr));
-        actionClose_folder->setText(QCoreApplication::translate("Tutorial", "Close folder", nullptr));
+        actionClose_folder->setText(QCoreApplication::translate("Tutorial", "Close project", nullptr));
         actionClose_window->setText(QCoreApplication::translate("Tutorial", "Close window", nullptr));
         actionQuit->setText(QCoreApplication::translate("Tutorial", "Quit", nullptr));
         actionUndo->setText(QCoreApplication::translate("Tutorial", "Undo", nullptr));
@@ -256,9 +319,20 @@ public:
 #if QT_CONFIG(shortcut)
         actionNew_command->setShortcut(QCoreApplication::translate("Tutorial", "Ctrl+N, Ctrl+C", nullptr));
 #endif // QT_CONFIG(shortcut)
+        actionProject_Viewer->setText(QCoreApplication::translate("Tutorial", "Project Viewer", nullptr));
+#if QT_CONFIG(shortcut)
+        actionProject_Viewer->setShortcut(QCoreApplication::translate("Tutorial", "Ctrl+0, Ctrl+Alt+Shift+P", nullptr));
+#endif // QT_CONFIG(shortcut)
         toolButton->setText(QCoreApplication::translate("Tutorial", "...", nullptr));
         menu_File->setTitle(QCoreApplication::translate("Tutorial", "&File", nullptr));
         menuEdit->setTitle(QCoreApplication::translate("Tutorial", "Edit", nullptr));
+        menuViews->setTitle(QCoreApplication::translate("Tutorial", "Views", nullptr));
+        ProjectViewer->setWindowTitle(QCoreApplication::translate("Tutorial", "Project Viewer", nullptr));
+        actionProject_delete->setText(QCoreApplication::translate("Tutorial", "Delete", nullptr));
+        actionProject_new->setText(QCoreApplication::translate("Tutorial", "New", nullptr));
+        actionProject_options->setText(QCoreApplication::translate("Tutorial", "Options...", nullptr));
+        QTreeWidgetItem *___qtreewidgetitem = treeWidget->headerItem();
+        ___qtreewidgetitem->setText(0, QCoreApplication::translate("Tutorial", "Project", nullptr));
     } // retranslateUi
 
 };

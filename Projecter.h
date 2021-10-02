@@ -4,13 +4,17 @@
 #include <QList>
 #include <QFileInfo>
 #include <QTextStream>
-
+/*
+	FileDir;;
+	FileType
+*/
+//https://github.com/guanxiaohan/QtWidgetsApplication2.git
 class Projecter:public QObject
 {
 public:
 	enum fileTypes {
 		Unknown,
-		Unset, Text, Cpp, Cpp_Header, C, Dll, Lib, Python, Json, HTML, Xml, CSS, JavaScript, SQL, VB, VBS, Java,
+		Unset, Text, Cpp, Cpp_Header, C, Dll, Python, Json, HTML, Xml, CSS, JavaScript, SQL, VB, VBS, Java,
 		Unset_picture, Png, Jpg, Svg, Bmp, Ico,
 		Unset_audio, Mp3, Wav, Ogg, Flav
 	};
@@ -26,7 +30,7 @@ public:
 	Projecter(QString fileUrl);
 	~Projecter();
 
-	File addFile(QString fileName, fileTypes fileType = Unset, int fileId = 1);
+	File addFile(QString fileName, fileTypes fileType, int fileId);
 	File removeFile(QString fileName);
 	File removeFile(int fileId);
 	QList<File> removeFiles(fileTypes type);
