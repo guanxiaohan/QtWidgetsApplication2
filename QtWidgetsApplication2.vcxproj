@@ -103,11 +103,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="NewFileDialog.cpp" />
     <ClCompile Include="powerShell.cpp" />
     <ClCompile Include="Projecter.cpp" />
     <ClCompile Include="startWizard.cpp" />
     <ClCompile Include="Turorial.cpp" />
     <QtRcc Include="Tutorial.qrc" />
+    <QtUic Include="NewFileDialog.ui" />
     <QtUic Include="powerShell.ui" />
     <QtUic Include="startWizard.ui" />
     <QtUic Include="textPage.ui" />
@@ -120,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="powerShell.h" />
+    <QtMoc Include="NewFileDialog.h" />
     <ClInclude Include="Projecter.h" />
     <ClInclude Include="resource.h" />
     <QtMoc Include="startWizard.h" />

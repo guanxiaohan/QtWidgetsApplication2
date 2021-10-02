@@ -4,6 +4,7 @@
 #include "textPage.h"
 #include "powerShell.h"
 #include "Projecter.h"
+#include "newFileDialog.h"
 #include <qmainwindow.h>
 #include <QList>
 #include <QFile>

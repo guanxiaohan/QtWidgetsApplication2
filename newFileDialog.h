@@ -1,23 +1,28 @@
 #pragma once
 
 #include <QDialog>
-#include "ui_newfiledialog.h"
+#include <QList>
+#include <QMessageBox>
+#include <QDir>
+#include <QFileDialog>
+#include <Qt>
 
-namespace Ui {
-	class newFileDialog;
-}
+namespace Ui { class NewFileDialog; };
 
-class newFileDialog : public QDialog
+class NewFileDialog : public QDialog
 {
 	Q_OBJECT
 
 public:
-	newFileDialog(QWidget *parent = Q_NULLPTR);
-	~newFileDialog();
+	NewFileDialog(QString& result, QList<QString> options, QWidget* parent = Q_NULLPTR);
+	~NewFileDialog();
+	static QList<QString> getNewFile(QList<QString> options);
 
 private:
-	Ui::newFileDialog *ui;
+	Ui::NewFileDialog *ui;
+	QString& Result;
 
 private slots:
-	QString Entry();
+	void Confirm();
+	void Cancel();
 };

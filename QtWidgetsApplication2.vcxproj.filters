@@ -49,6 +49,9 @@
     <ClCompile Include="Projecter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NewFileDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -90,6 +93,9 @@
     <QtMoc Include="startWizard.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="NewFileDialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="textPage.ui">
@@ -99,6 +105,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="startWizard.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="NewFileDialog.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
