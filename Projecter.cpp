@@ -1,5 +1,5 @@
 #include "Projecter.h"
-
+//ddd
 Projecter::Projecter(QString fileUrl)
 {
 	QFile file(fileUrl);
