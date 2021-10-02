@@ -33,6 +33,7 @@ public:
 	};
 	QList<textPage*> Tabs;
 	QList<powerShell*> cmdTabs;
+	bool projectOpened = false;
 
 private:
 	Ui::Tutorial* ui;

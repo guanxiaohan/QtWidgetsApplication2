@@ -26,6 +26,7 @@ public:
 		int fileId;
 	};
 	QList<File> ProjectFiles;
+	QString ProjectLocation;
 
 	Projecter(QString fileUrl);
 	~Projecter();

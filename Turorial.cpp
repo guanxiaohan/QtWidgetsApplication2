@@ -39,9 +39,14 @@ Tutorial::~Tutorial() {
 
 void Tutorial::newFile() 
 {
-	textPage* unit = new textPage();
-	ui->tabWidget->addTab(unit, tr("Untitled"));
-	Tabs.append(unit);
+	if (!projectOpened) {
+		textPage* unit = new textPage();
+		ui->tabWidget->addTab(unit, tr("Untitled"));
+		Tabs.append(unit);
+	}
+	else {
+		
+	}
 }
 
 void Tutorial::openFile()

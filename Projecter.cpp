@@ -7,6 +7,7 @@ Projecter::Projecter(QString fileUrl)
 	QTextStream out(&file);
 	if (/*QFileInfo(fileUrl).suffix().toLower() == QString(".iep")*/true) {
 		if (file.open(QFile::ReadOnly)) {
+			ProjectLocation = fileUrl;
 			QString ProjectText = out.readAll();
 			file.close();
 			ProjectText.replace("\n", "");
@@ -57,38 +58,79 @@ Projecter::~Projecter()
 {
 }
 
-Projecter::File Projecter::addFile(QString fileName, fileTypes fileType = Unset, int fileId = 1)
+Projecter::File Projecter::addFile(QString fileName, fileTypes fileType = fileTypes::Unset, int fileId = -1)
 {
-	return File();
+	if (fileId = -1) {
+		fileId = ProjectFiles.count();
+	}
+	ProjectFiles.append(File(fileName, fileType, fileId));
 }
 
 Projecter::File Projecter::removeFile(QString fileName)
 {
-	return File();
+	for (auto i : ProjectFiles) {
+		if (i.FileName == fileName) {
+			ProjectFiles.removeOne(i);
+		}
+	}
 }
 
 Projecter::File Projecter::removeFile(int fileId)
 {
-	return File();
+	for (auto i : ProjectFiles) {
+		if (i.fileId == fileId) {
+			ProjectFiles.removeOne(i);
+			return i;
+			break; 
+		}
+	}
 }
 
 QList<Projecter::File> Projecter::removeFiles(fileTypes type)
 {
-	return QList<File>();
+	QList<Projecter::File> file_list;
+	for (auto i : ProjectFiles) {
+		if (i.FileType == type) {
+			file_list.append(i);
+			ProjectFiles.removeOne(i);
+		}
+	}
+	return file_list;
 }
 
 QList<Projecter::File> Projecter::removeFiles(QList<fileTypes> types)
 {
-	return QList<File>();
+	QList<Projecter::File> file_list;
+	for (auto i : ProjectFiles) {
+		for (auto j : types) {
+			if (i.FileType == j) {
+				file_list.append(i);
+				ProjectFiles.removeOne(i);
+			}
+		}
+	}
+	return file_list;
 }
 
 bool Projecter::setFile(int fileId, QString fileName)
 {
+	for (auto i : ProjectFiles) {
+		if (i.fileId == fileId) {
+			i.FileName = fileName;
+			return true;
+		}
+	}
 	return false;
 }
 
 Projecter::File Projecter::fileAt(int fileId)
 {
+	for (auto i : ProjectFiles) {
+		if (i.fileId == fileId) {
+			return i;
+			break;
+		}
+	}
 	return File();
 }
 
