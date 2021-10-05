@@ -14,16 +14,20 @@ class NewFileDialog : public QDialog
 	Q_OBJECT
 
 public:
-	NewFileDialog(QString& result, QList<QString> options, QWidget* parent = Q_NULLPTR);
+	NewFileDialog(QString result, QList<QString> options, QWidget* parent = Q_NULLPTR);
 	~NewFileDialog();
-	static QList<QString> getNewFile(QList<QString> options);
+	static QString getNewFile(QList<QString> options);
+	inline QString getResult() { return Result; };
 
 private:
 	Ui::NewFileDialog *ui;
-	QString& Result;
+	QString Result;
+	void accept();
+	void done();
+	int Confirm();
+	void Cancel();
 
 private slots:
-	void Confirm();
-	void Cancel();
 	void SetDir();
+	
 };

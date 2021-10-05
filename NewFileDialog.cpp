@@ -1,45 +1,36 @@
 #include "NewFileDialog.h"
 #include "ui_NewFileDialog.h"
 
-NewFileDialog::NewFileDialog(QString& result, QList<QString> options, QWidget *parent)
-	: QDialog(parent), Result(result)
+NewFileDialog::NewFileDialog(QString result, QList<QString> options, QWidget *parent)
+	: QDialog(parent), Result(result), ui(new Ui::NewFileDialog())
 {
-	ui = new Ui::NewFileDialog();
 	ui->setupUi(this);
 	setLayout(ui->gridLayout);
 
-	connect(ui->confirmButton, &QPushButton::clicked, this, &NewFileDialog::Confirm);
-	connect(ui->cancelButton, &QPushButton::clicked, this, &NewFileDialog::Cancel);
+	connect(ui->confirmButton, &QPushButton::clicked, this, &NewFileDialog::accept);
+	connect(ui->cancelButton, &QPushButton::clicked, this, &NewFileDialog::done);
+	connect(ui->setDirButton, &QPushButton::clicked, this, &NewFileDialog::SetDir);
 
 	for (auto i : options) {
 		ui->listWidget->addItem(i);
 	}
-
-	show();
 }
 
 NewFileDialog::~NewFileDialog()
 {
 	delete ui;
 }
-
-QList<QString> NewFileDialog::getNewFile(QList<QString> options)
+QString NewFileDialog::getNewFile(QList<QString> options)
 {
 	QString res;
-	auto dialog = NewFileDialog(res, options);
-	dialog.exec();
-
-	if (!res.isEmpty()) {
-		auto args = res.split("//");
-		QList<QString> list;
-		list.append(args[0]);
-		list.append(args[1]);
-		list.append(args[2]);
-		return list;
-	}
+	NewFileDialog* dialog = new NewFileDialog(res, options);
+	dialog->exec();
+	res = dialog->getResult();
+	delete dialog;
+	return res;
 }
 
-void NewFileDialog::Confirm() 
+int NewFileDialog::Confirm() 
 {
 	if (ui->listWidget->currentItem() != nullptr &&
 		!ui->fileNameLineEdit->text().isEmpty() &&
@@ -52,7 +43,7 @@ void NewFileDialog::Confirm()
 				ui->fileNameLineEdit->text() +
 				"//" +
 				ui->dirLineEdit->text();
-			setHidden(true);
+			return 1;
 		}
 		else {
 			QMessageBox::information(this, "Information", "File dir is not exist.");
@@ -61,12 +52,25 @@ void NewFileDialog::Confirm()
 	else {
 		QMessageBox::information(this, "Information", "You didn't enter all the informations of file.");
 	}
+	return 0;
+}
+
+void NewFileDialog::accept()
+{
+	if (Confirm() == 1) {
+		QDialog::accept();
+	};
+}
+
+void NewFileDialog::done()
+{
+	Cancel();
+	QDialog::reject();
 }
 
 void NewFileDialog::Cancel()
 {
 	Result = "";
-	setHidden(true);
 }
 
 void NewFileDialog::SetDir() 

@@ -45,10 +45,11 @@ void Tutorial::newFile()
 		Tabs.append(unit);
 	}
 	else {
-		auto args = NewFileDialog::getNewFile({"Unset", "Cpp"});
-		project->addFile(args[2] + args[1], Projecter::Unset, project->allFiles().count() + 1);
+		QString args = NewFileDialog::getNewFile({"Unset", "Cpp"});
+		auto arg = args.split("//");
+		project->addFile(arg[1] + arg[2], Projecter::Unset, project->allFiles().count() + 1);
 		auto item = new QTreeWidgetItem(ui->treeWidget);
-		item->setText(0, args[2] + args[1]);
+		item->setText(0, arg[1] + arg[2]);
 		ProjectFilesItem.append(item);
 		ui->treeWidget->update();
 	}

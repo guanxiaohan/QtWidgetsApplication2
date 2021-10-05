@@ -46,7 +46,7 @@ Projecter::Projecter(QString fileUrl)
 			}
 		}
 		else {
-			abort();
+			;
 		}
 	}
 	else {
