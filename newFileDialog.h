@@ -17,10 +17,10 @@ public:
 	NewFileDialog(QString& result, QList<QString> options, QWidget* parent = Q_NULLPTR);
 	~NewFileDialog();
 	static QList<QString> getNewFile(QList<QString> options);
+	QString Result;
 
 private:
 	Ui::NewFileDialog *ui;
-	QString& Result;
 
 private slots:
 	void Confirm();
