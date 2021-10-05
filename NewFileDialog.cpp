@@ -1,8 +1,8 @@
 #include "NewFileDialog.h"
 #include "ui_NewFileDialog.h"
 
-NewFileDialog::NewFileDialog(QString result, QList<QString> options, QWidget *parent)
-	: QDialog(parent), Result(result), ui(new Ui::NewFileDialog())
+NewFileDialog::NewFileDialog(QList<QString> options, QWidget *parent)
+	: QDialog(parent), ui(new Ui::NewFileDialog())
 {
 	ui->setupUi(this);
 	setLayout(ui->gridLayout);
@@ -19,15 +19,6 @@ NewFileDialog::NewFileDialog(QString result, QList<QString> options, QWidget *pa
 NewFileDialog::~NewFileDialog()
 {
 	delete ui;
-}
-QString NewFileDialog::getNewFile(QList<QString> options)
-{
-	QString res;
-	NewFileDialog* dialog = new NewFileDialog(res, options);
-	dialog->exec();
-	res = dialog->getResult();
-	delete dialog;
-	return res;
 }
 
 int NewFileDialog::Confirm() 

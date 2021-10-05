@@ -4,9 +4,13 @@
 #include <QList>
 #include <QFileInfo>
 #include <QTextStream>
+#include <QMessageBox>
 /*
-	FileDir;;
-	FileType
+	ProjectDir;;
+	ProjectType;;
+	    ProjectFile1Dir//ProjectFile1Type//ProjectFile1Id;
+		ProjectFile2Dir//ProjectFile2Type//ProjectFile2Id;
+		......
 */
 //https://github.com/guanxiaohan/QtWidgetsApplication2.git
 class Projecter:public QObject
@@ -28,9 +32,11 @@ public:
 	QList<File> ProjectFiles;
 	QString ProjectLocation;
 
+	Projecter();
 	Projecter(QString fileUrl);
 	~Projecter();
 
+	void setProjectDir(QString dir);
 	File addFile(QString fileName, fileTypes fileType, int fileId);
 	File removeFile(QString fileName);
 	File removeFile(int fileId);

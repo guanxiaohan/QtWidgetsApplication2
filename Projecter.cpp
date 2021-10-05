@@ -1,13 +1,26 @@
 #include "Projecter.h"
+Projecter::Projecter()
+{
+
+}
 //ddd
 //15966862453b
 Projecter::Projecter(QString fileUrl)
 {
-	QFile file(fileUrl);
+	setProjectDir(fileUrl);
+}
+
+Projecter::~Projecter()
+{
+}
+
+void Projecter::setProjectDir(QString dir)
+{
+	QFile file(dir);
 	QTextStream out(&file);
 	if (/*QFileInfo(fileUrl).suffix().toLower() == QString(".iep")*/true) {
 		if (file.open(QFile::ReadOnly)) {
-			ProjectLocation = fileUrl;
+			ProjectLocation = dir;
 			QString ProjectText = out.readAll();
 			file.close();
 			ProjectText.replace("\n", "");
@@ -39,7 +52,7 @@ Projecter::Projecter(QString fileUrl)
 				case 14:m_file.FileType = VB;
 				case 15:m_file.FileType = VBS;
 				case 16:m_file.FileType = Java;
-				//Not all, add it later.
+					//Not all, add it later.
 				}
 				m_file.fileId = FileArguments[2].toInt();
 				ProjectFiles.append(m_file);
@@ -52,10 +65,6 @@ Projecter::Projecter(QString fileUrl)
 	else {
 		qDebug() << "Not .iep file";
 	}
-}
-
-Projecter::~Projecter()
-{
 }
 
 Projecter::File Projecter::addFile(QString fileName, fileTypes fileType = fileTypes::Unset, int fileId = -1)

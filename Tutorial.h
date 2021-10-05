@@ -39,7 +39,7 @@ public:
 private:
 	Ui::Tutorial* ui;
 	textPage* currentTab;
-	Projecter* project;
+	Projecter project;
 	QList<QTreeWidgetItem*> ProjectFilesItem;
 
 private slots:

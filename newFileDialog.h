@@ -14,9 +14,8 @@ class NewFileDialog : public QDialog
 	Q_OBJECT
 
 public:
-	NewFileDialog(QString result, QList<QString> options, QWidget* parent = Q_NULLPTR);
+	NewFileDialog(QList<QString> options, QWidget* parent = Q_NULLPTR);
 	~NewFileDialog();
-	static QString getNewFile(QList<QString> options);
 	inline QString getResult() { return Result; };
 
 private:

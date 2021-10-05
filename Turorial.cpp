@@ -10,6 +10,7 @@ Tutorial::Tutorial(QMainWindow* parent):
 	ui->CmdTabWidget->setHidden(true);
 	ui->gridLayoutWidget_2->setLayout(ui->gridLayout_2);
 	ui->ProjectViewer->setWidget(ui->gridLayoutWidget_2);
+	Projecter project();
 
 	connect(ui->actionNew, &QAction::triggered, this, &Tutorial::newFile);
 	connect(ui->actionNew_command, &QAction::triggered, this, &Tutorial::newCommand);
@@ -45,13 +46,16 @@ void Tutorial::newFile()
 		Tabs.append(unit);
 	}
 	else {
-		QString args = NewFileDialog::getNewFile({"Unset", "Cpp"});
-		auto arg = args.split("//");
-		project->addFile(arg[1] + arg[2], Projecter::Unset, project->allFiles().count() + 1);
-		auto item = new QTreeWidgetItem(ui->treeWidget);
-		item->setText(0, arg[1] + arg[2]);
-		ProjectFilesItem.append(item);
-		ui->treeWidget->update();
+		NewFileDialog dialog({ "Unset", "Cpp" });
+		if (dialog.exec() == QDialog::Accepted) {
+			auto args = dialog.getResult();
+			auto arg = args.split("//");
+			project.addFile(arg[1] + arg[2], Projecter::Unset, project.allFiles().count() + 1);
+			auto item = new QTreeWidgetItem(ui->treeWidget);
+			item->setText(0, arg[1] + arg[2]);
+			ProjectFilesItem.append(item);
+			ui->treeWidget->update();
+		}
 	}
 }
 
@@ -122,8 +126,8 @@ void Tutorial::printCode()
 void Tutorial::openProject()
 {
 	auto projectDir = QFileDialog::getOpenFileName(this, "Open project, from project file:*.iep:", "./", "IDLE Project(*.iep)");
-	Projecter* project = new Projecter(projectDir);
-	auto fileList = project->allFiles();
+	project.setProjectDir(projectDir);
+	auto fileList = project.allFiles();
 	for (auto i : fileList) {
 		auto item = new QTreeWidgetItem(ui->treeWidget);
 		item->setText(0, i.FileName);
