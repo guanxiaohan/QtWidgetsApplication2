@@ -30,10 +30,10 @@ int NewFileDialog::Confirm()
 		if (QDir(ui->dirLineEdit->text()).exists()) {
 			Result =
 				QString::number(ui->listWidget->currentRow()) +
-				"//" +
-				ui->fileNameLineEdit->text() +
-				"//" +
-				ui->dirLineEdit->text();
+				";;" +
+				ui->dirLineEdit->text() + 
+				";;" +
+				ui->fileNameLineEdit->text();
 			return 1;
 		}
 		else {

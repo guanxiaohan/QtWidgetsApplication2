@@ -35,19 +35,22 @@ public:
 	QList<textPage*> Tabs;
 	QList<powerShell*> cmdTabs;
 	bool projectOpened = false;
+	void reflashProjectTreeWidget();
 
 private:
 	Ui::Tutorial* ui;
 	textPage* currentTab;
 	Projecter project;
 	QList<QTreeWidgetItem*> ProjectFilesItem;
+	
 
 private slots:
 	void newFile();
 	void newCommand();
-	void openFile();
+	void openFile(const QString dir = "");
 	void openProject();
 	void saveFile();
 	void showCommand();
 	void printCode();
+	void projectFileOpened(QTreeWidgetItem* item, int column);
 };

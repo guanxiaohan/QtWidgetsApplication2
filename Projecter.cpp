@@ -67,7 +67,7 @@ void Projecter::setProjectDir(QString dir)
 	}
 }
 
-Projecter::File Projecter::addFile(QString fileName, fileTypes fileType = fileTypes::Unset, int fileId = -1)
+Projecter::File Projecter::addFile(QString fileName, fileTypes fileType, int fileId)
 {
 	if (fileId == -1) {
 		fileId = ProjectFiles.count();
@@ -78,26 +78,27 @@ Projecter::File Projecter::addFile(QString fileName, fileTypes fileType = fileTy
 
 Projecter::File Projecter::removeFile(QString fileName)
 {
-	/*
+	int count = 0;
 	for (auto i : ProjectFiles) {
 		if (i.FileName == fileName) {
-			ProjectFiles.removeOne(i);
+			ProjectFiles.removeAt(count);
+			return i;
 		}
-	}*/
+		count++;
+	}
 	return File();
 }
 
 Projecter::File Projecter::removeFile(int fileId)
 {
-	/*
+	int count = 0;
 	for (auto i : ProjectFiles) {
 		if (i.fileId == fileId) {
-			ProjectFiles.removeOne(i);
+			ProjectFiles.removeAt(count);
 			return i;
-			break; 
 		}
+		count++;
 	}
-	*/
 	return File();
 }
 
@@ -141,13 +142,12 @@ bool Projecter::setFile(int fileId, QString fileName)
 	}
 	return false;
 }
-/*
+
 Projecter::File Projecter::fileAt(int fileId)
 {
 	for (auto i : ProjectFiles) {
 		if (i.fileId == fileId) {
 			return i;
-			break;
 		}
 	}
 	return File();
@@ -160,14 +160,19 @@ QList<Projecter::File> Projecter::filesOfType(fileTypes type)
 
 int Projecter::idOf(File file)
 {
-	return 0;
+	return file.fileId;
 }
 
-int Projecter::idOf(QString fileName, fileTypes type)
+int Projecter::idOf(QString fileName)
 {
-	return 0;
+	for (auto i : ProjectFiles){
+		if (i.FileName == fileName) {
+			return i.fileId;
+		}
+	}
+	return -1;
 }
-*/
+
 QList<Projecter::File> Projecter::allFiles()
 {
 	return ProjectFiles;

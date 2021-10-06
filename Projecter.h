@@ -37,18 +37,18 @@ public:
 	~Projecter();
 
 	void setProjectDir(QString dir);
-	File addFile(QString fileName, fileTypes fileType, int fileId);
+	File addFile(QString fileName, fileTypes fileType = Unset, int fileId = -1);
 	File removeFile(QString fileName);
 	File removeFile(int fileId);
 	QList<File> removeFiles(fileTypes type);
 	QList<File> removeFiles(QList<fileTypes> types);
 	bool setFile(int fileId, QString fileName);
-	/*
+	
 	File fileAt(int fileId);
 	QList<File> filesOfType(fileTypes type);
 	int idOf(File file);
-	int idOf(QString fileName, fileTypes type = Unknown);
-	*/
+	int idOf(QString fileName);
+	
 	QList<File> allFiles();
 };
 
