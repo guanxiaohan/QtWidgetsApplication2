@@ -25,10 +25,13 @@ class textPage : public QWidget
 	Q_OBJECT
 
 public:
-	textPage(QString,QString,QWidget *parent = Q_NULLPTR);
+    enum formats {
+        None, Cpp, Python, Java, CSharp, VB, Html, Css, Javascript, Json, Sql
+    };
+	textPage(QString,QString,formats,QWidget *parent = Q_NULLPTR);
 	textPage(QWidget* parent = Q_NULLPTR);
 	~textPage();
-	void setUp(QString str,QString file);
+    void setUp(QString str, QString file, formats format);
 	QString GetText();
 	QString GetFile();
     void setFile(QString);
@@ -36,6 +39,7 @@ public:
 	Ui::textPage* ui;
 	QTimer* timer = new QTimer();
     QString currentFile;
+    formats Format;
 	
 private:
 	void unSave() { fileSaved = false; };
@@ -47,6 +51,7 @@ class Highlighter:public QSyntaxHighlighter
 
 public:
     Highlighter(QTextDocument* parent = 0);
+    void setLangFormat(textPage::formats);
 
 protected:
     virtual void highlightBlock(const QString& text);

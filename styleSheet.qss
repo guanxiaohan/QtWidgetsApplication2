@@ -49,8 +49,9 @@ QTabBar::close-button{
 QTabBar::close-button:hover{
 	background:#00EEFF;
 }
-QTreeWidget{
+QListWidget{
 	background-color:#444444;
+	color:#FCFCFC;
 }
 QHeaderView::section{
 	color:#000000;

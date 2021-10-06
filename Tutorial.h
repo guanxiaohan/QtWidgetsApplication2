@@ -41,16 +41,17 @@ private:
 	Ui::Tutorial* ui;
 	textPage* currentTab;
 	Projecter project;
-	QList<QTreeWidgetItem*> ProjectFilesItem;
+	QList<QListWidgetItem*> ProjectFilesItem;
+	void openProjectFile(const QString dir = "");
 	
 
 private slots:
 	void newFile();
 	void newCommand();
-	void openFile(const QString dir = "");
+	void openFile();
 	void openProject();
 	void saveFile();
 	void showCommand();
 	void printCode();
-	void projectFileOpened(QTreeWidgetItem* item, int column);
+	void projectFileOpened(QListWidgetItem*);
 };

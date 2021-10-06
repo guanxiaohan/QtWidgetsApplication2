@@ -19,6 +19,8 @@ Tutorial::Tutorial(QMainWindow* parent):
 	connect(ui->actionSave, &QAction::triggered, this, &Tutorial::saveFile);
 	connect(ui->actionNew_command, &QAction::triggered, this, &Tutorial::showCommand);
 	connect(ui->actionPrint, &QAction::triggered, this, &Tutorial::printCode);
+
+	connect(ui->projectListWidget, &QListWidget::itemDoubleClicked, this, &Tutorial::projectFileOpened);
 		
 	QFile Qss("styleSheet.qss");
 	Qss.open(QFile::ReadOnly);
@@ -50,64 +52,37 @@ void Tutorial::newFile()
 		if (dialog.exec() == QDialog::Accepted) {
 			auto args = dialog.getResult();
 			auto arg = args.split(";;");
+			QFile file(arg[1] + "/" + arg[2]);
+			file.open(QFile::WriteOnly);
+			file.close();
 			project.addFile(arg[1] + "/" + arg[2], Projecter::Unset);
-			auto item = new QTreeWidgetItem(ui->treeWidget);
-			item->setText(0, arg[1] + "/" + arg[2]);
-			ProjectFilesItem.append(item);
-			ui->treeWidget->update();
+			reflashProjectTreeWidget();
 		}
 	}
 }
 
-void Tutorial::openFile(const QString dir)
+void Tutorial::openFile()
 {
-	if (dir.isEmpty()) {
-		auto fileName = QFileDialog::getOpenFileName(this, "Open file:", "./",
-			"Text file(*.txt);;C++ files(*.cpp;*.h)");
-		if (!fileName.isEmpty()) {
-			QFile file(fileName);
-			if (file.open(QFile::ReadOnly)) {
-				QTextStream out(&file);
-				QString content;
-				content = out.readAll();
-				textPage* unit = new textPage(fileName, content);
-				ui->tabWidget->addTab(unit, QFileInfo(fileName).fileName());
-				QMessageBox::information(this, "Debug", "File:" + fileName + " Text:\n" + content);
-				Tabs.append(unit);
-				file.close();
-			}
-			else {
-				QMessageBox::warning(this, "File open error", "Uncaught error with opening file:\n" + file.errorString());
-			}
-		}
-	}
-	else {
-		QFile file(dir);
+	auto fileName = QFileDialog::getOpenFileName(this, "Open file:", "./",
+		"Text file(*.txt);;C++ files(*.cpp;*.h)");
+	if (!fileName.isEmpty()) {
+		QFile file(fileName);
 		if (file.open(QFile::ReadOnly)) {
 			QTextStream out(&file);
 			QString content;
 			content = out.readAll();
-			textPage* unit = new textPage(dir, content);
-			ui->tabWidget->addTab(unit, QFileInfo(dir).fileName());
-			QMessageBox::information(this, "Debug", "File:" + dir + " Text:\n" + content);
+			textPage* unit = new textPage(fileName, content);
+			ui->tabWidget->addTab(unit, QFileInfo(fileName).fileName());
+			QMessageBox::information(this, "Debug", "File:" + fileName + " Text:\n" + content);
 			Tabs.append(unit);
 			file.close();
 		}
 		else {
-			if (file.exists()) {
-				QMessageBox::warning(this, "File open error", "Uncaught error with opening file:\n" + file.errorString());
-			}
-			else {
-				auto result = QMessageBox::warning(this, "File open error", "The file is not existing!\nDo you want to remove it from the project?", QMessageBox::Yes | QMessageBox::Retry | QMessageBox::No);
-				if (result == QMessageBox::Yes) {
-					int Id = project.idOf(file.fileName());
-					project.removeFile(Id);
-					reflashProjectTreeWidget();
-				}
-			}
+			QMessageBox::warning(this, "File open error", "Uncaught error with opening file:\n" + file.errorString());
 		}
 	}
 }
+
 
 void Tutorial::newCommand()
 {
@@ -118,14 +93,14 @@ void Tutorial::newCommand()
 
 void Tutorial::reflashProjectTreeWidget()
 {
-	ui->treeWidget->clear();
+	ui->projectListWidget->clear();
 	ProjectFilesItem.clear();
 	auto fileList = project.allFiles();
 	for (auto i : fileList) {
-		auto item = new QTreeWidgetItem(ui->treeWidget);
-		item->setText(0, i.FileName);
+		auto item = new QListWidgetItem(ui->projectListWidget);
+		item->setText(i.FileName);
 		ProjectFilesItem.append(item);
-		ui->treeWidget->update();
+		ui->projectListWidget->update();
 	}
 }
 
@@ -166,20 +141,57 @@ void Tutorial::printCode()
 
 void Tutorial::openProject()
 {
-	auto projectDir = QFileDialog::getOpenFileName(this, "Open project, from project file:*.iep:", "./", "IDLE Project(*.iep)");
+	auto projectDir = QFileDialog::getOpenFileName(this, "Open project from project file:*.iep:", "./", "IDLE Project(*.iep)");
 	project.setProjectDir(projectDir);
 	auto fileList = project.allFiles();
 	for (auto i : fileList) {
-		auto item = new QTreeWidgetItem(ui->treeWidget);
-		item->setText(0, i.FileName);
+		auto item = new QListWidgetItem(ui->projectListWidget);
+		item->setText(i.FileName);
 		ProjectFilesItem.append(item);
-		ui->treeWidget->update();
+		ui->projectListWidget->update();
 	}
 	projectOpened = true;
 	//Not all.
 }
 
-void Tutorial::projectFileOpened(QTreeWidgetItem *item, int column)
+void Tutorial::openProjectFile(const QString dir)
 {
-	openFile(item->text(column));
+	if (!dir.isEmpty()) {
+		QFile file(dir);
+		if (file.open(QFile::ReadOnly)) {
+			QTextStream out(&file);
+			QString content;
+			content = out.readAll();
+			textPage* unit = new textPage(dir, content);
+			ui->tabWidget->addTab(unit, QFileInfo(dir).fileName());
+			QMessageBox::information(this, "Debug", "File:" + dir + " Text:\n" + content);
+			Tabs.append(unit);
+			file.close();
+		}
+		else {
+			if (file.exists()) {
+				QMessageBox::warning(this, "File open error", "Uncaught error with opening file:\n" + file.errorString());
+			}
+			else {
+				auto result = QMessageBox::warning(this, "File open error", 
+					"File doesn't exists!\nDo you want to remove it from the project?",
+					QMessageBox::Yes|QMessageBox::Retry|QMessageBox::No);
+				if (result == QMessageBox::Yes) {
+					project.removeFile(file.fileName());
+					reflashProjectTreeWidget();
+				}
+				else if (result == QMessageBox::Retry) {
+					openProjectFile(dir);
+				}
+				else {
+					;
+				}
+			}
+		}
+	}
+}
+
+void Tutorial::projectFileOpened(QListWidgetItem* item)
+{
+	openProjectFile(item->text());
 }

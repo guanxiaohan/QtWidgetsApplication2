@@ -16,7 +16,7 @@
 #include <QtWidgets/QDockWidget>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
@@ -24,7 +24,6 @@
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QToolButton>
-#include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -73,16 +72,17 @@ public:
     QWidget *dockWidgetContents_2;
     QWidget *gridLayoutWidget_2;
     QGridLayout *gridLayout_2;
+    QPushButton *actionProject_options;
     QToolButton *actionProject_delete;
     QToolButton *actionProject_new;
-    QPushButton *actionProject_options;
-    QTreeWidget *treeWidget;
+    QToolButton *openProjectFileButton;
+    QListWidget *projectListWidget;
 
     void setupUi(QMainWindow *Tutorial)
     {
         if (Tutorial->objectName().isEmpty())
             Tutorial->setObjectName(QString::fromUtf8("Tutorial"));
-        Tutorial->resize(789, 425);
+        Tutorial->resize(793, 428);
         QIcon icon;
         icon.addFile(QString::fromUtf8("C:/Users/Lenovo/.designer/backup/bitmap1.bmp"), QSize(), QIcon::Normal, QIcon::Off);
         Tutorial->setWindowIcon(icon);
@@ -140,7 +140,7 @@ public:
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayoutWidget = new QWidget(centralWidget);
         gridLayoutWidget->setObjectName(QString::fromUtf8("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(0, 0, 789, 371));
+        gridLayoutWidget->setGeometry(QRect(0, 0, 791, 371));
         gridLayout = new QGridLayout(gridLayoutWidget);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
@@ -181,7 +181,7 @@ public:
         Tutorial->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(Tutorial);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 789, 22));
+        menuBar->setGeometry(QRect(0, 0, 793, 22));
         menu_File = new QMenu(menuBar);
         menu_File->setObjectName(QString::fromUtf8("menu_File"));
         menuEdit = new QMenu(menuBar);
@@ -200,12 +200,17 @@ public:
         dockWidgetContents_2->setObjectName(QString::fromUtf8("dockWidgetContents_2"));
         gridLayoutWidget_2 = new QWidget(dockWidgetContents_2);
         gridLayoutWidget_2->setObjectName(QString::fromUtf8("gridLayoutWidget_2"));
-        gridLayoutWidget_2->setGeometry(QRect(-1, -1, 191, 351));
+        gridLayoutWidget_2->setGeometry(QRect(-1, -1, 235, 351));
         gridLayout_2 = new QGridLayout(gridLayoutWidget_2);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         gridLayout_2->setContentsMargins(0, 0, 0, 0);
+        actionProject_options = new QPushButton(gridLayoutWidget_2);
+        actionProject_options->setObjectName(QString::fromUtf8("actionProject_options"));
+
+        gridLayout_2->addWidget(actionProject_options, 0, 3, 1, 1);
+
         actionProject_delete = new QToolButton(gridLayoutWidget_2);
         actionProject_delete->setObjectName(QString::fromUtf8("actionProject_delete"));
 
@@ -216,16 +221,15 @@ public:
 
         gridLayout_2->addWidget(actionProject_new, 0, 1, 1, 1);
 
-        actionProject_options = new QPushButton(gridLayoutWidget_2);
-        actionProject_options->setObjectName(QString::fromUtf8("actionProject_options"));
+        openProjectFileButton = new QToolButton(gridLayoutWidget_2);
+        openProjectFileButton->setObjectName(QString::fromUtf8("openProjectFileButton"));
 
-        gridLayout_2->addWidget(actionProject_options, 0, 2, 1, 1);
+        gridLayout_2->addWidget(openProjectFileButton, 0, 2, 1, 1);
 
-        treeWidget = new QTreeWidget(gridLayoutWidget_2);
-        treeWidget->setObjectName(QString::fromUtf8("treeWidget"));
-        treeWidget->header()->setVisible(false);
+        projectListWidget = new QListWidget(gridLayoutWidget_2);
+        projectListWidget->setObjectName(QString::fromUtf8("projectListWidget"));
 
-        gridLayout_2->addWidget(treeWidget, 1, 0, 1, 3);
+        gridLayout_2->addWidget(projectListWidget, 1, 0, 1, 4);
 
         ProjectViewer->setWidget(dockWidgetContents_2);
         Tutorial->addDockWidget(Qt::RightDockWidgetArea, ProjectViewer);
@@ -328,11 +332,10 @@ public:
         menuEdit->setTitle(QCoreApplication::translate("Tutorial", "Edit", nullptr));
         menuViews->setTitle(QCoreApplication::translate("Tutorial", "Views", nullptr));
         ProjectViewer->setWindowTitle(QCoreApplication::translate("Tutorial", "Project Viewer", nullptr));
+        actionProject_options->setText(QCoreApplication::translate("Tutorial", "Options...", nullptr));
         actionProject_delete->setText(QCoreApplication::translate("Tutorial", "Delete", nullptr));
         actionProject_new->setText(QCoreApplication::translate("Tutorial", "New", nullptr));
-        actionProject_options->setText(QCoreApplication::translate("Tutorial", "Options...", nullptr));
-        QTreeWidgetItem *___qtreewidgetitem = treeWidget->headerItem();
-        ___qtreewidgetitem->setText(0, QCoreApplication::translate("Tutorial", "Project", nullptr));
+        openProjectFileButton->setText(QCoreApplication::translate("Tutorial", "Open", nullptr));
     } // retranslateUi
 
 };
